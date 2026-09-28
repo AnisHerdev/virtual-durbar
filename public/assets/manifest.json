@@ -47,7 +47,7 @@
       "id": "crown-chola",
       "label": "Chola kirita mukuta",
       "file": "/assets/props/crown-chola.svg",
-      "scale": 1.25,
+      "scale": 2,
       "anchorY": 0.1
     },
     {
@@ -91,6 +91,55 @@
       "file": "/assets/props/helmet-senapati.svg",
       "scale": 1.45,
       "anchorY": 0.14
+    },
+    {
+      "id": "necklace-royal",
+      "label": "Royal pearl haar",
+      "file": "/assets/props/necklace-royal.svg",
+      "scale": 1.8,
+      "anchorY": 0.97
+    },
+    {
+      "id": "necklace-saffron",
+      "label": "Saffron mala",
+      "file": "/assets/props/necklace-saffron.svg",
+      "scale": 1.5,
+      "anchorY": 0.97
+    },
+    {
+      "id": "necklace-green",
+      "label": "Emerald mala",
+      "file": "/assets/props/necklace-green.svg",
+      "scale": 1.5,
+      "anchorY": 0.97
+    },
+    {
+      "id": "necklace-crimson",
+      "label": "Crimson mala",
+      "file": "/assets/props/necklace-crimson.svg",
+      "scale": 1.5,
+      "anchorY": 0.97
+    },
+    {
+      "id": "necklace-indigo",
+      "label": "Indigo mala",
+      "file": "/assets/props/necklace-indigo.svg",
+      "scale": 1.5,
+      "anchorY": 0.97
+    },
+    {
+      "id": "necklace-violet",
+      "label": "Violet mala",
+      "file": "/assets/props/necklace-violet.svg",
+      "scale": 1.5,
+      "anchorY": 0.97
+    },
+    {
+      "id": "necklace-marigold",
+      "label": "Marigold mala",
+      "file": "/assets/props/necklace-marigold.svg",
+      "scale": 1.5,
+      "anchorY": 0.97
     }
   ],
   "borders": [

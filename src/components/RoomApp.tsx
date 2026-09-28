@@ -173,10 +173,12 @@ function CourtShell({ transport, room, name }: { transport: Transport; room: str
   const [entered, setEntered] = useState(false);
   const phase = court.view?.phase ?? court.summary?.phase ?? 'lobby';
 
-  // Headwear and painted placeholder follow the seat you hold.
+  // Headwear, necklace and painted placeholder follow the seat you hold.
   useEffect(() => {
     const def = court.myRole ? roleDef(content, court.myRole) : null;
-    void ar.setProp(def ? content.manifest.props.find((p) => p.id === def.headwear) ?? null : null);
+    const prop = (id: string | undefined) => content.manifest.props.find((p) => p.id === id) ?? null;
+    void ar.setProp(prop(def?.headwear));
+    void ar.setNecklace(prop(def?.necklace));
     ar.setPlaceholder({ emblem: def?.emblem ?? '☀', name, color: def?.color ?? '#b8860b' });
   }, [ar, content, court.myRole, name]);
 

@@ -214,6 +214,50 @@ write('props/turban-white.svg', turban('#f4efe2', '#d8cfb8', '#6b21a8'));
 write('props/turban-marigold.svg', turban('#f2b01e', '#cf8a0c', '#1d6b44'));
 write('props/helmet-senapati.svg', helmet);
 
+// ── Props (necklaces) ────────────────────────────────────────────────────────
+// Same 400×300 viewBox; the strands start at the top edge so the AR pipeline
+// can hang them from the base of the neck (anchorY near 1).
+
+function pearlStrand(sag, count, r, fill, stroke) {
+  // Evenly spaced beads along a U-shaped strand from (60,10) to (340,10).
+  return Array.from({ length: count }, (_, i) => {
+    const t = i / (count - 1);
+    const x = 60 + t * 280;
+    const y = 10 + sag * (1 - (2 * t - 1) ** 2);
+    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
+  }).join('');
+}
+
+const necklaceRoyal = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Raja's haar: three strands of pearls with an emerald-and-ruby pendant -->
+  ${pearlStrand(120, 21, 7, '#fdf6e3', '#8a6a2a')}
+  ${pearlStrand(160, 23, 8, '#e8b830', '#7a4b0c')}
+  ${pearlStrand(200, 25, 8, '#fdf6e3', '#8a6a2a')}
+  <path d="M200,188 l34,30 l-34,52 l-34,-52 Z" fill="#e8b830" stroke="#7a4b0c" stroke-width="5"/>
+  <circle cx="200" cy="226" r="16" fill="#1d6b44" stroke="#fbe7a1" stroke-width="4"/>
+  <circle cx="200" cy="262" r="8" fill="#b3202a" stroke="#fbe7a1" stroke-width="3"/>
+  <circle cx="200" cy="284" r="7" fill="#fdf6e3" stroke="#8a6a2a" stroke-width="2"/>
+</svg>`;
+
+function necklace(gem) {
+  return `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Minister's mala: pearl strand with a gold-set pendant in the seat's colour -->
+  ${pearlStrand(150, 23, 7, '#fdf6e3', '#8a6a2a')}
+  <path d="M200,150 l24,26 l-24,40 l-24,-40 Z" fill="#e8b830" stroke="#7a4b0c" stroke-width="4"/>
+  <circle cx="200" cy="180" r="11" fill="${gem}" stroke="#fbe7a1" stroke-width="3"/>
+</svg>`;
+}
+
+write('props/necklace-royal.svg', necklaceRoyal);
+write('props/necklace-saffron.svg', necklace('#c2410c'));
+write('props/necklace-green.svg', necklace('#15803d'));
+write('props/necklace-crimson.svg', necklace('#b91c1c'));
+write('props/necklace-indigo.svg', necklace('#1e3a8a'));
+write('props/necklace-violet.svg', necklace('#6b21a8'));
+write('props/necklace-marigold.svg', necklace('#a16207'));
+
 // ── Ornate UI border (used as CSS border-image, slice 30) ───────────────────
 const border = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="90" height="90">
@@ -235,13 +279,20 @@ const manifest = {
     { id: 'durbar-sunset', label: 'Court at sunset', file: '/assets/backgrounds/durbar-sunset.svg', phases: ['sunset', 'debrief'] },
   ],
   props: [
-    { id: 'crown-chola', label: 'Chola kirita mukuta', file: '/assets/props/crown-chola.svg', scale: 1.25, anchorY: 0.1 },
+    { id: 'crown-chola', label: 'Chola kirita mukuta', file: '/assets/props/crown-chola.svg', scale: 2, anchorY: 0.1 },
     { id: 'turban-saffron', label: 'Saffron pagdi', file: '/assets/props/turban-saffron.svg', scale: 1.55, anchorY: 0.16 },
     { id: 'turban-green', label: 'Green pagdi', file: '/assets/props/turban-green.svg', scale: 1.55, anchorY: 0.16 },
     { id: 'turban-indigo', label: 'Indigo pagdi', file: '/assets/props/turban-indigo.svg', scale: 1.55, anchorY: 0.16 },
     { id: 'turban-white', label: 'White pagdi', file: '/assets/props/turban-white.svg', scale: 1.55, anchorY: 0.16 },
     { id: 'turban-marigold', label: 'Marigold pagdi', file: '/assets/props/turban-marigold.svg', scale: 1.55, anchorY: 0.16 },
     { id: 'helmet-senapati', label: "Senapati's helmet", file: '/assets/props/helmet-senapati.svg', scale: 1.45, anchorY: 0.14 },
+    { id: 'necklace-royal', label: 'Royal pearl haar', file: '/assets/props/necklace-royal.svg', scale: 1.8, anchorY: 0.97 },
+    { id: 'necklace-saffron', label: 'Saffron mala', file: '/assets/props/necklace-saffron.svg', scale: 1.5, anchorY: 0.97 },
+    { id: 'necklace-green', label: 'Emerald mala', file: '/assets/props/necklace-green.svg', scale: 1.5, anchorY: 0.97 },
+    { id: 'necklace-crimson', label: 'Crimson mala', file: '/assets/props/necklace-crimson.svg', scale: 1.5, anchorY: 0.97 },
+    { id: 'necklace-indigo', label: 'Indigo mala', file: '/assets/props/necklace-indigo.svg', scale: 1.5, anchorY: 0.97 },
+    { id: 'necklace-violet', label: 'Violet mala', file: '/assets/props/necklace-violet.svg', scale: 1.5, anchorY: 0.97 },
+    { id: 'necklace-marigold', label: 'Marigold mala', file: '/assets/props/necklace-marigold.svg', scale: 1.5, anchorY: 0.97 },
   ],
   borders: [{ id: 'border-miniature', file: '/assets/props/border-miniature.svg' }],
 };

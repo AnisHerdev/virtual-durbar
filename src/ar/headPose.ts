@@ -1,16 +1,22 @@
-// Pure geometry for anchoring headwear to MediaPipe face landmarks.
+// Pure geometry for anchoring headwear and necklaces to MediaPipe face landmarks.
 
 export interface Landmark {
   x: number;
   y: number;
 }
 
-/** Where headwear goes, in output-canvas pixels. (x, y) is the top of the forehead. */
+/** Where a prop goes, in output-canvas pixels. (x, y) is its anchor point. */
 export interface HeadPose {
   x: number;
   y: number;
   width: number; // face width (temple to temple)
-  angle: number; // head roll in radians
+  angle: number; // roll in radians
+}
+
+/** Anchors for both prop slots: top of the forehead and base of the neck. */
+export interface PropPoses {
+  head: HeadPose;
+  neck: HeadPose;
 }
 
 // Face mesh indices: 10 = top of forehead, 152 = chin, 234/454 = face edges.
@@ -19,13 +25,13 @@ const CHIN = 152;
 const LEFT_EDGE = 234;
 const RIGHT_EDGE = 454;
 
-export function placeProp(
+export function placeProps(
   landmarks: Landmark[],
   videoWidth: number,
   videoHeight: number,
   crop: { sx: number; sy: number },
   scale: number,
-): HeadPose | null {
+): PropPoses | null {
   const pick = (i: number) => {
     const p = landmarks[i];
     return p ? { x: (p.x * videoWidth - crop.sx) * scale, y: (p.y * videoHeight - crop.sy) * scale } : null;
@@ -43,7 +49,13 @@ export function placeProp(
   const ux = (top.x - chin.x) / (faceHeight || 1);
   const uy = (top.y - chin.y) / (faceHeight || 1);
   const lift = faceHeight * 0.08;
-  return { x: top.x + ux * lift, y: top.y + uy * lift, width, angle };
+  // The neck base sits roughly a third of a face below the chin. Shoulders
+  // don't follow a head tilt, so the necklace only takes part of the roll.
+  const drop = faceHeight * 0.35;
+  return {
+    head: { x: top.x + ux * lift, y: top.y + uy * lift, width, angle },
+    neck: { x: chin.x - ux * drop, y: chin.y - uy * drop, width, angle: angle * 0.4 },
+  };
 }
 
 /** Exponential smoothing to stop the crown from jittering. */

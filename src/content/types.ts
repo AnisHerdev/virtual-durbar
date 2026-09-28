@@ -28,6 +28,7 @@ export interface RoleDef {
   description: string;
   naturalFit: string[];
   headwear: string; // prop id in props manifest
+  necklace: string; // prop id in props manifest
   color: string; // accent (flat miniature palette)
   emblem: string; // single glyph for tiles without video
 }
@@ -235,7 +236,7 @@ export interface PropDef {
   file: string;
   /** Width relative to the detected face width. */
   scale: number;
-  /** Vertical anchor: fraction of prop height that sits below the forehead point. */
+  /** Vertical anchor: fraction of prop height that sits below the anchor point (forehead for headwear, neck base for necklaces). */
   anchorY: number;
 }
 

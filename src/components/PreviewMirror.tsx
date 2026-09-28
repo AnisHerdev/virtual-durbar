@@ -7,6 +7,7 @@ export function PreviewMirror({ showMic }: { showMic: boolean }) {
   const state = useARState(ar);
   const [bg, setBg] = useState(ar.backgroundEnabled);
   const [prop, setProp] = useState(ar.propEnabled);
+  const [necklace, setNecklace] = useState(ar.necklaceEnabled);
   const [muted, setMuted] = useState(false);
 
   const statusText =
@@ -49,6 +50,14 @@ export function PreviewMirror({ showMic }: { showMic: boolean }) {
           onChange={(v) => {
             ar.propEnabled = v;
             setProp(v);
+          }}
+        />
+        <Toggle
+          on={necklace}
+          label="Necklace"
+          onChange={(v) => {
+            ar.necklaceEnabled = v;
+            setNecklace(v);
           }}
         />
         {showMic && <Toggle on={mic} label="Microphone" onChange={setMic} />}

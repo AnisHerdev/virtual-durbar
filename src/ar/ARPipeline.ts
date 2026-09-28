@@ -1,11 +1,11 @@
 // On-device AR compositor:
 //   webcam → ImageSegmenter (person mask) → court background
-//          → FaceLandmarker (head pose) → role headwear
+//          → FaceLandmarker (head pose) → role headwear + necklace
 //          → hidden <canvas> → canvas.captureStream(30) → published to LiveKit.
 
 import type { PropDef } from '../content/types';
 import type { VisionModels } from './visionModels';
-import { placeProp, smoothPose, type HeadPose } from './headPose';
+import { placeProps, smoothPose, type HeadPose, type PropPoses } from './headPose';
 
 export const OUTPUT_WIDTH = 640;
 export const OUTPUT_HEIGHT = 480;
@@ -70,11 +70,14 @@ export class ARPipeline {
   private background: HTMLImageElement | null = null;
   private prop: HTMLImageElement | null = null;
   private propDef: PropDef | null = null;
+  private necklace: HTMLImageElement | null = null;
+  private necklaceDef: PropDef | null = null;
   private placeholder: Placeholder = { emblem: '☀', name: '', color: '#b8860b' };
   backgroundEnabled = true;
   propEnabled = true;
+  necklaceEnabled = true;
 
-  private pose: HeadPose | null = null;
+  private poses: PropPoses | null = null;
   private lastTs = 0;
   private frameCount = 0;
   private fpsWindowStart = performance.now();
@@ -171,6 +174,11 @@ export class ARPipeline {
     this.prop = def ? await loadImage(def.file) : null;
   }
 
+  async setNecklace(def: PropDef | null) {
+    this.necklaceDef = def;
+    this.necklace = def ? await loadImage(def.file) : null;
+  }
+
   setPlaceholder(p: Placeholder) {
     this.placeholder = p;
   }
@@ -259,19 +267,29 @@ export class ARPipeline {
     }
     if (!composited) ctx.drawImage(this.video, crop.sx, crop.sy, crop.sw, crop.sh, 0, 0, W, H);
 
-    // Face landmarks every other frame; the pose is smoothed in between.
-    const face = this.propEnabled && this.prop ? this.models?.face : null;
+    // Face landmarks every other frame; the poses are smoothed in between.
+    const showHead = this.propEnabled && !!this.prop && !!this.propDef;
+    const showNeck = this.necklaceEnabled && !!this.necklace && !!this.necklaceDef;
+    const face = showHead || showNeck ? this.models?.face : null;
     if (face && this.frameIndex++ % 2 === 0) {
       try {
         const res = face.detectForVideo(this.video, ts);
         const lm = res.faceLandmarks?.[0];
-        const next = lm ? placeProp(lm, vw, vh, crop, W / crop.sw) : null;
-        this.pose = next ? smoothPose(this.pose, next, 0.55) : null;
+        const next = lm ? placeProps(lm, vw, vh, crop, W / crop.sw) : null;
+        this.poses = next
+          ? {
+              head: smoothPose(this.poses?.head ?? null, next.head, 0.55),
+              neck: smoothPose(this.poses?.neck ?? null, next.neck, 0.55),
+            }
+          : null;
       } catch (e) {
         console.warn('[ar] face frame failed', e);
       }
     }
-    if (this.propEnabled && this.prop && this.propDef && this.pose) this.drawProp(this.pose);
+    if (this.poses) {
+      if (showNeck) this.drawProp(this.necklace!, this.necklaceDef!, this.poses.neck);
+      if (showHead) this.drawProp(this.prop!, this.propDef!, this.poses.head);
+    }
     this.countFrame();
   }
 
@@ -327,13 +345,13 @@ export class ARPipeline {
       ctx.fillText(name, cx, cy + 160);
     }
     if (this.prop && this.propDef && this.propEnabled) {
-      this.drawProp({ x: cx, y: cy - 88, width: 230, angle: 0 });
+      // Cap the drawn width so the big crown does not swamp the medallion.
+      const width = Math.min(230, 360 / this.propDef.scale);
+      this.drawProp(this.prop, this.propDef, { x: cx, y: cy - 88, width, angle: 0 });
     }
   }
 
-  private drawProp(pose: HeadPose) {
-    const img = this.prop!;
-    const def = this.propDef!;
+  private drawProp(img: HTMLImageElement, def: PropDef, pose: HeadPose) {
     const width = pose.width * def.scale;
     const height = width * (img.naturalHeight / img.naturalWidth || 0.75);
     const { ctx } = this;
