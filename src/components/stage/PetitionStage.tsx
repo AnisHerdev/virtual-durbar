@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { PetitionRun } from '../../game/types';
 import type { Court } from '../../game/useCourt';
-import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, useRoleTitles, useTaskDef } from './common';
+import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, proceedMove, useRoleTitles, useTaskDef, type Move } from './common';
 
 export function PetitionStage({ court, task }: { court: Court; task: Omit<PetitionRun, 'bribed'> }) {
   const view = court.view!;
@@ -13,9 +13,19 @@ export function PetitionStage({ court, task }: { court: Court; task: Omit<Petiti
   const ministers = view.players.filter((p) => p.role !== 'raja');
   const bribe = view.me.task.bribeOffer;
   const chosen = def.options.find((o) => o.id === task.choice);
+  const move: Move =
+    task.stage === 'assign'
+      ? isRaja
+        ? { act: true, text: 'Choose a minister to judge this petition.' }
+        : { act: false, text: <>The Raja is choosing a judge. By custom this falls to the {titles[def.suggestedRole]}.</> }
+      : task.stage === 'active'
+        ? mine
+          ? { act: true, text: 'Pick a ruling below, then pronounce it before time runs out.' }
+          : { act: false, text: `${playerName(view, task.assignee)} is deliberating. Advise them aloud!` }
+        : proceedMove(court);
 
   return (
-    <StageFrame kicker={`Petition · ${def.mode === 'puzzle' ? 'A mystery to solve' : 'A matter of policy'}`} title={def.title} court={court} deadline={task.deadline}>
+    <StageFrame kicker={`Petition · ${def.mode === 'puzzle' ? 'A mystery to solve' : 'A matter of policy'}`} title={def.title} court={court} deadline={task.deadline} move={move}>
       <p className="text-ink-soft">
         <b className="text-ink">{def.petitioner}</b> comes before the throne.
       </p>

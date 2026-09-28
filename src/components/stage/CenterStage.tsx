@@ -11,7 +11,12 @@ export function CenterStage({ court }: { court: Court }) {
   const view = court.view;
   if (!view) {
     return (
-      <StageFrame kicker="The court assembles" title="Awaiting the throne" court={court}>
+      <StageFrame
+        kicker="The court assembles"
+        title="Awaiting the throne"
+        court={court}
+        move={{ act: false, text: court.hostIdentity ? 'Receiving the court scrolls…' : 'Waiting for someone to take the throne.' }}
+      >
         <p>{court.hostIdentity ? 'Receiving the court scrolls…' : 'No one sits on the throne. The game begins once a Raja or Rani takes the seat.'}</p>
       </StageFrame>
     );
@@ -42,7 +47,16 @@ function AssemblyStage({ court }: { court: Court }) {
   const isRaja = court.myRole === 'raja';
   const ministers = view.players.filter((p) => p.role !== 'raja');
   return (
-    <StageFrame kicker="The court assembles" title="Before the three days" court={court}>
+    <StageFrame
+      kicker="The court assembles"
+      title="Before the three days"
+      court={court}
+      move={
+        isRaja
+          ? { act: true, text: 'When your ministers are seated, begin the three days.' }
+          : { act: false, text: 'When the court is ready, the Raja will begin.' }
+      }
+    >
       <p className="leading-snug">
         Over three accelerated days you will hear petitions each morning, test your wits at midday, face a team mission
         each afternoon, and at sunset the Raja issues an edict. Fifteen matters in all.
@@ -70,9 +84,7 @@ function AssemblyStage({ court }: { court: Court }) {
             <p className="text-sm text-ink-soft">You may begin alone to explore, but the court is best with 3–7 players.</p>
           )}
         </>
-      ) : (
-        <p className="italic">When the court is ready, the Raja will begin.</p>
-      )}
+      ) : null}
     </StageFrame>
   );
 }

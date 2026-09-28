@@ -6,7 +6,6 @@ import type { Court } from '../game/useCourt';
 import { navigate } from '../lib/session';
 import { CodexDialog } from './Codex';
 import { useMedia } from './media';
-import { PHASE_LABEL } from './stage/common';
 
 const STATS: { key: StatKey; label: string; sanskrit: string; bar?: boolean }[] = [
   { key: 'gold', label: 'Treasury', sanskrit: 'Kosha' },
@@ -54,8 +53,8 @@ export function KingdomBar({ court }: { court: Court }) {
           <p className="font-display text-lg text-gold-light">
             {view && view.status !== 'lobby' && day ? `Day ${view.day} of 3 · ${day.theme}` : 'Virtual Durbar'}
           </p>
-          <p className="text-sm text-parchment/80">
-            {PHASE_LABEL[phase] ?? phase} · <span className="font-mono">{court.roomId}</span>
+          <p className="text-sm text-parchment/70">
+            Room <span className="font-mono">{court.roomId}</span>
           </p>
         </div>
       </div>
@@ -63,8 +62,8 @@ export function KingdomBar({ court }: { court: Court }) {
       {view && (
         <dl className="flex flex-wrap items-center gap-x-3 gap-y-1">
           {STATS.map((s) => (
-            <div key={s.key} className="flex flex-col leading-none" title={`${s.label} (${s.sanskrit})`}>
-              <dt className="text-[0.7rem] uppercase tracking-wider text-parchment/60">{s.sanskrit}</dt>
+            <div key={s.key} className="flex flex-col gap-0.5 leading-none" title={`${s.label} · ${s.sanskrit}`}>
+              <dt className="text-[0.72rem] uppercase tracking-wider text-parchment/70">{s.label}</dt>
               <dd className="font-display text-lg tabular-nums text-parchment">
                 {s.bar ? (
                   <span className="flex items-center gap-1">
@@ -82,8 +81,8 @@ export function KingdomBar({ court }: { court: Court }) {
               </dd>
             </div>
           ))}
-          <div className="flex flex-col border-l border-gold/40 pl-3 leading-none" title="Your personal purse">
-            <dt className="text-[0.7rem] uppercase tracking-wider text-gold-light/80">Your purse</dt>
+          <div className="flex flex-col gap-0.5 border-l border-gold/40 pl-3 leading-none" title="Your own gold and grain, separate from the realm's">
+            <dt className="text-[0.72rem] uppercase tracking-wider text-gold-light/85">Your purse</dt>
             <dd className="font-display text-lg tabular-nums text-gold-light">
               {view.me.purse.gold}g · {view.me.purse.grain} grain
             </dd>

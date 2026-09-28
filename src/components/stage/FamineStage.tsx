@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { FamineRun, PublicTask } from '../../game/types';
 import type { Court } from '../../game/useCourt';
-import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, useTaskDef } from './common';
+import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, proceedMove, useTaskDef, type Move } from './common';
 
 type FamineView = Extract<PublicTask, Pick<FamineRun, 'kind'>>;
 
@@ -75,9 +75,18 @@ export function FamineStage({ court, task }: { court: Court; task: FamineView })
   const totalGrain = task.declared.grain + task.granary;
   const pledged = me.task.myPledge;
   const changed = !pledged || pledged.gold !== gold || pledged.grain !== grain;
+  const move: Move = !active
+    ? proceedMove(court)
+    : duties.includes('knowsNeed') && !pledged
+      ? { act: true, text: 'Only you know the true need. Tell the court, then seal your own pledge.' }
+      : !pledged
+        ? { act: true, text: 'Seal a secret pledge of gold and grain from your own purse.' }
+        : court.myRole === 'raja'
+          ? { act: true, text: 'Pledge sealed. Send the carts when the court has given enough.' }
+          : { act: false, text: 'Pledge sealed. You may change it until the carts leave.' };
 
   return (
-    <StageFrame kicker="Team Mission · The Famine" title={def.title} court={court} deadline={task.deadline}>
+    <StageFrame kicker="Team Mission · The Famine" title={def.title} court={court} deadline={task.deadline} move={move}>
       <p className="leading-snug">{def.summary}</p>
 
       <div className="grid gap-2 rounded-md bg-parchment-deep/70 p-3">

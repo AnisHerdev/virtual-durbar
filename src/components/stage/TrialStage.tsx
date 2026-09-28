@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { PublicTask, TrialRun } from '../../game/types';
 import type { Court } from '../../game/useCourt';
-import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, useTaskDef } from './common';
+import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, proceedMove, useTaskDef, type Move } from './common';
 
 type TrialView = Extract<PublicTask, Pick<TrialRun, 'kind'>>;
 
@@ -15,9 +15,16 @@ export function TrialStage({ court, task }: { court: Court; task: TrialView }) {
   const tally = (id: string) => Object.values(task.votes).filter((v) => v === id).length;
   const myVote = task.votes[court.selfIdentity];
   const active = task.stage === 'active';
+  const move: Move = !active
+    ? proceedMove(court)
+    : isRaja
+      ? { act: true, text: 'Hear every record read aloud, then pronounce one suspect guilty.' }
+      : myVote
+        ? { act: false, text: 'Vote cast. You may change it until the Raja pronounces a verdict.' }
+        : { act: true, text: 'Read your secret record to the court, then vote for a suspect.' };
 
   return (
-    <StageFrame kicker="Team Mission · The Court Trial" title={def.title} court={court} deadline={task.deadline}>
+    <StageFrame kicker="Team Mission · The Court Trial" title={def.title} court={court} deadline={task.deadline} move={move}>
       <p className="leading-snug">{def.summary}</p>
 
       <SecretBox title={myClues.length === 1 ? 'The record only you hold' : 'The records only you hold'}>

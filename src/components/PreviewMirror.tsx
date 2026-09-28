@@ -34,10 +34,13 @@ export function PreviewMirror({ showMic }: { showMic: boolean }) {
           {m}
         </p>
       ))}
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="flex flex-wrap items-center justify-center gap-2" role="group" aria-labelledby="attire-label">
+        <span id="attire-label" className="w-full text-center text-xs uppercase tracking-wider text-parchment/60 sm:w-auto">
+          Attire
+        </span>
         <Toggle
           on={bg}
-          label="Court background"
+          label="Background"
           onChange={(v) => {
             ar.backgroundEnabled = v;
             setBg(v);
@@ -46,7 +49,7 @@ export function PreviewMirror({ showMic }: { showMic: boolean }) {
         />
         <Toggle
           on={prop}
-          label="Royal headwear"
+          label="Headwear"
           onChange={(v) => {
             ar.propEnabled = v;
             setProp(v);
@@ -60,6 +63,11 @@ export function PreviewMirror({ showMic }: { showMic: boolean }) {
             setNecklace(v);
           }}
         />
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2" role="group" aria-labelledby="sound-label">
+        <span id="sound-label" className="w-full text-center text-xs uppercase tracking-wider text-parchment/60 sm:w-auto">
+          Sound
+        </span>
         {showMic && <Toggle on={mic} label="Microphone" onChange={setMic} />}
         <Toggle
           on={!muted}

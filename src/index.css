@@ -55,6 +55,10 @@
   textarea {
     font: inherit;
   }
+  ::selection {
+    background: var(--color-gold-light);
+    color: var(--color-ink);
+  }
 }
 
 @layer components {
@@ -177,6 +181,29 @@
     height: 2px;
     background: linear-gradient(90deg, transparent, currentColor, transparent);
   }
+  /* Tabs drawn as folio page markers. */
+  .tab {
+    position: relative;
+    padding: 0.35rem 0.25rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+    cursor: pointer;
+  }
+  .tab[aria-selected='true'] {
+    color: var(--color-sindoor);
+  }
+  .tab[aria-selected='true']::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--color-sindoor);
+  }
+  .tab:hover:not([aria-selected='true']) {
+    color: var(--color-ink);
+  }
   .scroll-thin {
     scrollbar-width: thin;
     scrollbar-color: var(--color-gold) transparent;
@@ -210,8 +237,23 @@
   animation: rise 360ms ease-out both;
 }
 
+/* A slow breath on the "Your move" tag: noticeable in peripheral vision, never frantic. */
+@keyframes move-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(233 198 106 / 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgb(233 198 106 / 0);
+  }
+}
+.move-pulse {
+  animation: move-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .speaking,
+  .move-pulse,
   .rise {
     animation: none;
   }

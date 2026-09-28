@@ -33,6 +33,8 @@ export function Lobby({ court, onEnter }: { court: Court; onEnter: () => void })
   const inGame = view && view.status !== 'lobby';
   const myGameSeat = view?.players.find((p) => p.identity === court.selfIdentity)?.role;
   const unseated = peers.filter((p) => !roles.has(p.identity));
+  const vacant = content.roles.filter((r) => !holders.has(r.id)).length;
+  const mySeat = myRole ? content.roles.find((r) => r.id === myRole) : undefined;
 
   const copyLink = async () => {
     try {
@@ -75,25 +77,45 @@ export function Lobby({ court, onEnter }: { court: Court; onEnter: () => void })
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
         <div className="flex flex-col gap-4">
           <PreviewMirror showMic={court.transport.kind === 'livekit'} />
-          <div className="folio-plain rounded-md p-4 text-center">
+          <div className="folio-plain flex flex-col gap-2 rounded-md p-4">
             {roleConflict ? (
-              <p className="text-sindoor">Someone claimed the {roleTitle(content.roles, roleConflict)} seat a moment before you. Choose another.</p>
-            ) : myRole ? (
-              <p>
-                You will sit as <b>{roleTitle(content.roles, myRole)}</b>.
+              <p className="text-center text-sindoor">
+                Someone claimed the {roleTitle(content.roles, roleConflict)} seat a moment before you. Choose another.
               </p>
+            ) : mySeat ? (
+              <>
+                <p className="flex items-baseline gap-2">
+                  <span aria-hidden className="text-2xl" style={{ color: mySeat.color }}>
+                    {mySeat.emblem}
+                  </span>
+                  <span>
+                    You will sit as <b className="font-display text-lg font-normal">{mySeat.title}</b>{' '}
+                    <span className="font-deva text-ink-soft">{mySeat.sanskrit}</span>
+                  </span>
+                </p>
+                <p className="leading-snug">{mySeat.description}</p>
+                <p className="text-sm text-ink-soft">Suits players who enjoy: {mySeat.naturalFit.join(' · ')}</p>
+              </>
             ) : inGame && myGameSeat ? (
-              <p>Reclaiming your seat…</p>
+              <p className="text-center">Reclaiming your seat…</p>
             ) : (
-              <p>Choose a seat to see your royal attire.</p>
+              <p className="text-center text-ink-soft">Choose a seat on the right to see your duties and royal attire.</p>
             )}
-            <button className="btn btn-royal mt-3 w-full text-lg" disabled={!myRole} onClick={onEnter}>
+            <button className="btn btn-royal mt-1 w-full text-lg" disabled={!myRole} onClick={onEnter}>
               Enter the Durbar
             </button>
           </div>
         </div>
 
-        <section aria-label="Choose your role" className="grid content-start gap-3 sm:grid-cols-2">
+        <section aria-labelledby="choose-seat" className="grid content-start gap-3 sm:grid-cols-2">
+          <div className="flex items-baseline justify-between gap-3 sm:col-span-2">
+            <h2 id="choose-seat" className="text-2xl text-gold-light">
+              Choose your seat
+            </h2>
+            <p className="text-sm text-parchment/70">
+              {vacant} of {content.roles.length} vacant
+            </p>
+          </div>
           {content.roles.map((r) => {
             const holder = holders.get(r.id);
             const mine = holder?.you;
@@ -105,7 +127,7 @@ export function Lobby({ court, onEnter }: { court: Court; onEnter: () => void })
                 disabled={(!!holder && !mine) || lockedOut}
                 onClick={() => void court.claimRole(mine ? null : r.id)}
                 aria-pressed={!!mine}
-                className={`folio-plain group flex flex-col gap-1 rounded-md p-4 text-left transition ${
+                className={`folio-plain group flex flex-col gap-0.5 rounded-md px-4 py-3 text-left transition ${
                   mine ? 'ring-4 ring-gold-light' : holder ? 'opacity-60' : 'hover:-translate-y-0.5'
                 } ${r.id === 'raja' ? 'sm:col-span-2' : ''} disabled:cursor-not-allowed`}
               >
@@ -117,19 +139,15 @@ export function Lobby({ court, onEnter }: { court: Court; onEnter: () => void })
                     <span className="font-display text-xl">{r.title}</span>
                     <span className="font-deva text-ink-soft">{r.sanskrit}</span>
                   </span>
-                  <span className="text-xs uppercase tracking-wider text-ink-soft">
+                  <span
+                    className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wider ${
+                      mine ? 'bg-sindoor text-parchment' : holder ? 'bg-ink/10 text-ink-soft' : 'bg-peacock/15 text-peacock'
+                    }`}
+                  >
                     {mine ? 'Your seat' : holder ? `${holder.name}${holder.away ? ' (away)' : ''}` : 'Vacant'}
                   </span>
                 </span>
-                <span className="text-sm font-semibold text-sindoor">{r.epithet}</span>
-                <span className="text-[0.95rem] leading-snug">{r.description}</span>
-                <span className="mt-1 flex flex-wrap gap-1">
-                  {r.naturalFit.map((f) => (
-                    <span key={f} className="rounded-full bg-parchment-deep px-2 text-xs text-ink-soft">
-                      {f}
-                    </span>
-                  ))}
-                </span>
+                <span className="text-sm text-ink-soft">{r.epithet}</span>
               </button>
             );
           })}

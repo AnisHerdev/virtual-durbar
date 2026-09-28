@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useContent } from '../content/loadContent';
 import type { RoleId } from '../content/types';
 import type { Court } from '../game/useCourt';
-import { Chronicle, Whispers } from './Chronicle';
+import { CourtLog } from './Chronicle';
 import { Debrief } from './Debrief';
 import { KingdomBar } from './KingdomBar';
 import { LoyaltyOffer, SecretAgenda } from './SecretAgenda';
@@ -76,10 +76,10 @@ export function Courtroom({ court, onLeaveSeat }: { court: Court; onLeaveSeat: (
           </button>
         </div>
       )}
-      <div className="grid min-h-0 flex-1 gap-3 p-3 lg:grid-cols-[minmax(0,1.6fr)_minmax(340px,1fr)] xl:grid-cols-[minmax(190px,0.75fr)_minmax(0,1.55fr)_minmax(360px,1.15fr)]">
+      <div className="grid min-h-0 flex-1 gap-3 p-3 lg:grid-cols-[minmax(0,1.6fr)_minmax(340px,1fr)] xl:grid-cols-[minmax(190px,0.7fr)_minmax(0,1.4fr)_minmax(400px,1.3fr)]">
         {/* Throne */}
         <aside className="flex flex-col gap-3 lg:col-span-2 xl:col-span-1 xl:min-h-0" aria-label="The throne">
-          <div className="mx-auto w-full max-w-[280px] xl:max-w-none">{seat('raja', true)}</div>
+          <div className="mx-auto w-full max-w-[200px] sm:max-w-[280px] xl:max-w-none">{seat('raja', true)}</div>
           <SecretAgenda court={court} />
           {view?.status === 'lobby' && (
             <button className="btn btn-ghost text-sm text-parchment/80" onClick={onLeaveSeat}>
@@ -106,14 +106,13 @@ export function Courtroom({ court, onLeaveSeat }: { court: Court; onLeaveSeat: (
             <span aria-hidden className="text-gold-light">❖</span>
           </div>
           <div className="grid grid-cols-3 gap-3">{BOTTOM_ROW.map((r) => seat(r))}</div>
-          <div className="grid min-h-56 flex-1 gap-3 md:grid-cols-2 xl:min-h-0">
-            <Chronicle court={court} />
-            <Whispers court={court} />
+          <div className="flex min-h-64 flex-1 flex-col xl:min-h-0">
+            <CourtLog court={court} />
           </div>
         </section>
 
-        {/* Centre stage */}
-        <div className="min-h-[480px] lg:row-span-1 xl:min-h-0">
+        {/* Centre stage: on a single-column phone layout, your next move comes before the gallery of seats. */}
+        <div className="order-first min-h-[480px] lg:order-none lg:row-span-1 xl:min-h-0">
           <CenterStage court={court} />
         </div>
       </div>

@@ -1,16 +1,66 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import type { Court } from '../game/useCourt';
 import { useRoleTitles } from './stage/common';
 
-export function Chronicle({ court }: { court: Court }) {
+type Tab = 'chronicle' | 'whispers';
+
+/**
+ * The court's record and your private whispers share one panel, so only one
+ * stream of text competes for attention. Unread whispers surface on the tab.
+ */
+export function CourtLog({ court }: { court: Court }) {
+  const [tab, setTab] = useState<Tab>('chronicle');
+  const [unread, setUnread] = useState(0);
+  const tabs: { id: Tab; label: string }[] = [
+    { id: 'chronicle', label: 'Chronicle' },
+    { id: 'whispers', label: 'Whispers' },
+  ];
+  const onKey = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') setTab((t) => (t === 'chronicle' ? 'whispers' : 'chronicle'));
+  };
+  return (
+    <section className="folio-plain flex min-h-0 flex-1 flex-col rounded-md" aria-label="Court record">
+      <div role="tablist" aria-label="Court record" className="flex gap-5 border-b border-gold/60 px-3" onKeyDown={onKey}>
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            id={`log-tab-${t.id}`}
+            role="tab"
+            type="button"
+            className="tab"
+            aria-selected={tab === t.id}
+            aria-controls={`log-panel-${t.id}`}
+            tabIndex={tab === t.id ? 0 : -1}
+            onClick={() => setTab(t.id)}
+          >
+            {t.label}
+            {t.id === 'whispers' && unread > 0 && (
+              <span className="ml-1.5 inline-grid min-w-5 place-items-center rounded-full bg-sindoor px-1 font-body text-xs font-bold text-parchment">
+                {unread}
+                <span className="sr-only"> unread</span>
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+      <div id="log-panel-chronicle" role="tabpanel" aria-labelledby="log-tab-chronicle" hidden={tab !== 'chronicle'} className="flex min-h-0 flex-1 flex-col">
+        <Chronicle court={court} />
+      </div>
+      <div id="log-panel-whispers" role="tabpanel" aria-labelledby="log-tab-whispers" hidden={tab !== 'whispers'} className="flex min-h-0 flex-1 flex-col">
+        <Whispers court={court} visible={tab === 'whispers'} onUnread={setUnread} />
+      </div>
+    </section>
+  );
+}
+
+function Chronicle({ court }: { court: Court }) {
   const log = court.view?.log ?? [];
   const end = useRef<HTMLLIElement>(null);
   useEffect(() => {
     end.current?.scrollIntoView({ block: 'nearest' });
   }, [log.length]);
   return (
-    <section className="folio-plain flex min-h-0 flex-col rounded-md" aria-label="Court chronicle">
-      <h2 className="border-b border-gold/60 px-3 py-1 font-display text-lg text-sindoor">Chronicle of the court</h2>
+    <>
       <ol className="scroll-thin min-h-0 flex-1 space-y-1 overflow-y-auto px-3 py-2 text-[0.95rem]" aria-live="polite">
         {log.length === 0 && <li className="italic text-ink-soft">The scribe dips his pen…</li>}
         {log.map((e) => (
@@ -21,12 +71,12 @@ export function Chronicle({ court }: { court: Court }) {
         ))}
         <li ref={end} aria-hidden />
       </ol>
-    </section>
+    </>
   );
 }
 
 /** Private messages between two players; they never pass through the host. */
-export function Whispers({ court }: { court: Court }) {
+function Whispers({ court, visible, onUnread }: { court: Court; visible: boolean; onUnread: (n: number) => void }) {
   const titles = useRoleTitles();
   const others = (court.view?.players ?? []).filter((p) => p.identity !== court.selfIdentity);
   const [to, setTo] = useState<string>('');
@@ -38,14 +88,17 @@ export function Whispers({ court }: { court: Court }) {
   const lastSender = court.whispers.findLast((w) => w.from !== court.selfIdentity)?.from;
   const target = to || lastSender || others[0]?.identity || '';
   const thread = court.whispers.filter((w) => (w.from === target && w.to === court.selfIdentity) || w.to === target);
-  const unreadFrom = (id: string) => (id === target ? 0 : received(id) - (seen[id] ?? 0));
+  // The open thread only counts as read while the panel is actually on screen.
+  const unreadFrom = (id: string) => (visible && id === target ? 0 : received(id) - (seen[id] ?? 0));
   const unread = others.reduce((sum, p) => sum + unreadFrom(p.identity), 0);
   const end = useRef<HTMLLIElement>(null);
   const targetReceived = received(target);
   useEffect(() => {
+    if (!visible) return;
     end.current?.scrollIntoView({ block: 'nearest' });
     if (target) setSeen((s) => (s[target] === targetReceived ? s : { ...s, [target]: targetReceived }));
-  }, [thread.length, target, targetReceived]);
+  }, [visible, thread.length, target, targetReceived]);
+  useEffect(() => onUnread(unread), [unread, onUnread]);
 
   const send = (e: FormEvent) => {
     e.preventDefault();
@@ -55,12 +108,10 @@ export function Whispers({ court }: { court: Court }) {
   };
 
   return (
-    <section className="folio-plain flex min-h-0 flex-col rounded-md" aria-label="Whispers">
-      <div className="flex items-center justify-between gap-2 border-b border-gold/60 px-3 py-1">
-        <h2 className="font-display text-lg text-lapis">
-          Whispers {unread > 0 && <span className="text-sm text-sindoor">· {unread} unread</span>}
-        </h2>
-        <select className="field w-auto py-0.5 text-sm" value={target} onChange={(e) => setTo(e.target.value)} aria-label="Whisper to">
+    <>
+      <label className="flex items-center gap-2 border-b border-gold/30 px-3 py-1.5 text-sm">
+        <span className="text-ink-soft">To</span>
+        <select className="field min-w-0 flex-1 py-0.5 text-sm" value={target} onChange={(e) => setTo(e.target.value)} disabled={!others.length}>
           {others.map((p) => (
             <option key={p.identity} value={p.identity}>
               {p.name} — {titles[p.role]}
@@ -68,7 +119,7 @@ export function Whispers({ court }: { court: Court }) {
             </option>
           ))}
         </select>
-      </div>
+      </label>
       <ol className="scroll-thin min-h-0 flex-1 space-y-1 overflow-y-auto px-3 py-2 text-[0.95rem]">
         {!others.length && <li className="italic text-ink-soft">No one to whisper to yet.</li>}
         {others.length > 0 && !thread.length && (
@@ -101,6 +152,6 @@ export function Whispers({ court }: { court: Court }) {
           Send
         </button>
       </form>
-    </section>
+    </>
   );
 }

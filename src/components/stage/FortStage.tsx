@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SABOTAGE_TROOPS } from '../../game/engine';
 import type { FortRun, PublicTask } from '../../game/types';
 import type { Court } from '../../game/useCourt';
-import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, useTaskDef } from './common';
+import { Effects, ProceedBar, SecretBox, StageFrame, Verdict, playerName, proceedMove, useTaskDef, type Move } from './common';
 
 type FortView = Extract<PublicTask, Pick<FortRun, 'kind'>>;
 
@@ -35,6 +35,19 @@ export function FortStage({ court, task }: { court: Court; task: FortView }) {
   const used = alloc.reduce((a, b) => a + b, 0);
   const last = task.results[task.results.length - 1];
   const shownDefended = task.stage === 'wave-result' && last ? last.defended : task.allocation;
+  const canHold = isSenapati || court.myRole === 'raja';
+  const move: Move =
+    task.stage === 'resolved'
+      ? proceedMove(court)
+      : task.stage === 'wave-result'
+        ? canHold
+          ? { act: true, text: 'Read the wave report, then prepare the next wave.' }
+          : { act: false, text: 'The Senapati is regrouping for the next wave.' }
+        : isSenapati
+          ? { act: true, text: `Post your ${troops} troops across the four gates, then sound the war drums.` }
+          : duties.includes('spy')
+            ? { act: true, text: 'Only you see the enemy. Send the court a dispatch of their numbers.' }
+            : { act: false, text: 'Weigh the dispatches and advise the Senapati aloud.' };
 
   const bump = (i: number, d: number) => {
     const next = [...alloc];
@@ -50,6 +63,7 @@ export function FortStage({ court, task }: { court: Court; task: FortView }) {
       title={def.title}
       court={court}
       deadline={task.deadline}
+      move={move}
     >
       <p className="leading-snug">{def.summary}</p>
 
@@ -217,7 +231,7 @@ export function FortStage({ court, task }: { court: Court; task: FortView }) {
           <p className="font-display text-lg">
             Wave {task.results.length}: {last.breaches ? `${last.breaches} companies broke through — ${last.damage} damage` : 'every gate held!'}
           </p>
-          {(duties.includes('senapati') || court.myRole === 'raja') && (
+          {canHold && (
             <button className="btn btn-royal mt-2" onClick={() => court.act({ type: 'fort/hold' })}>
               {task.results.length >= def.waves.length ? 'See the outcome' : 'Prepare the next wave'}
             </button>

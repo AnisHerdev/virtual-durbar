@@ -3,21 +3,27 @@ import type { Court } from '../game/useCourt';
 
 /** Each player's private role card — the traitor's instructions live here. */
 export function SecretAgenda({ court }: { court: Court }) {
-  const [open, setOpen] = useState(true);
+  // Open for the first matter so everyone reads it once; afterwards the one-line gist is enough.
+  const [open, setOpen] = useState<boolean | null>(null);
   const view = court.view;
   if (!view || view.status !== 'playing') return null;
   const { isTraitor } = view.me;
   const isRaja = court.myRole === 'raja';
+  const expanded = open ?? view.taskIndex === 0;
+  const gist = isTraitor ? 'You secretly serve a rival kingdom.' : isRaja ? 'Rule wisely; find the traitor.' : 'You are loyal to the throne.';
   return (
     <section
       className={`rounded-md border-2 p-3 text-sm ${isTraitor ? 'border-sindoor bg-sindoor-deep/80' : 'border-gold/70 bg-stone/80'}`}
       aria-label="Your secret agenda"
     >
-      <button className="flex w-full items-center justify-between font-display text-base text-gold-light" onClick={() => setOpen(!open)} aria-expanded={open}>
-        <span>🔒 Your secret agenda</span>
-        <span aria-hidden>{open ? '▾' : '▸'}</span>
+      <button className="flex w-full items-start justify-between gap-2 text-left" onClick={() => setOpen(!expanded)} aria-expanded={expanded}>
+        <span>
+          <span className="block font-display text-base text-gold-light">🔒 Your secret agenda</span>
+          {!expanded && <span className="block text-parchment/80">{gist}</span>}
+        </span>
+        <span aria-hidden className="text-gold-light">{expanded ? '▾' : '▸'}</span>
       </button>
-      {open && (
+      {expanded && (
         <div className="mt-1 space-y-1 text-parchment/90">
           {isTraitor ? (
             <>

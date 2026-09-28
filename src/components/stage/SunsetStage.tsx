@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { SunsetRun } from '../../game/types';
 import type { Court } from '../../game/useCourt';
-import { Effects, ProceedBar, SecretBox, StageFrame, playerName, useRoleTitles, useTaskDef } from './common';
+import { Effects, ProceedBar, SecretBox, StageFrame, playerName, proceedMove, useRoleTitles, useTaskDef, type Move } from './common';
 
 const LOYALTY_STATUS: Record<string, string> = {
   offered: 'The envoy has made the offer. You await their answer…',
@@ -20,9 +20,19 @@ export function SunsetStage({ court, task }: { court: Court; task: SunsetRun }) 
   const [accused, setAccused] = useState<string>('');
   const edict = def.edicts.find((e) => e.id === task.edictId);
   const report = view.me.loyaltyReport;
+  const move: Move =
+    task.stage === 'decree'
+      ? isRaja
+        ? { act: true, text: 'Issue one edict for the realm.' }
+        : { act: false, text: 'The court waits for the Raja’s edict. Ministers, make your case!' }
+      : task.stage === 'accuse'
+        ? isRaja
+          ? { act: true, text: 'Name the minister you believe betrayed the realm — or no one.' }
+          : { act: false, text: 'The Raja weighs every word spoken these three days…' }
+        : proceedMove(court);
 
   return (
-    <StageFrame kicker="Sunset · Judgment & Loyalty" title={def.title} court={court}>
+    <StageFrame kicker="Sunset · Judgment & Loyalty" title={def.title} court={court} move={move}>
       <p className="leading-snug">{def.summary}</p>
 
       <div className="grid gap-2">
@@ -43,7 +53,6 @@ export function SunsetStage({ court, task }: { court: Court; task: SunsetRun }) 
             )}
           </div>
         ))}
-        {!isRaja && task.stage === 'decree' && <p className="italic">The court waits for the Raja’s edict. Ministers, make your case!</p>}
         {edict && <p className="font-semibold text-peacock">The Raja has decreed: {edict.label}.</p>}
       </div>
 
