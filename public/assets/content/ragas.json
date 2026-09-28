@@ -1,0 +1,80 @@
+[
+  {
+    "id": "darbari",
+    "name": "Darbari Kanada",
+    "prahar": "Late night — the raga of the royal court",
+    "mood": "Grave, majestic, unhurried",
+    "phases": ["lobby"],
+    "file": "/assets/audio/darbari-raga.mp3",
+    "tonicHz": 138.59,
+    "aroha": [0, 2, 3, 5, 7, 8, 10, 12],
+    "avaroha": [12, 8, 10, 7, 5, 7, 3, 5, 2, 0],
+    "pakad": [3, 5, 2, 0, -4, -2, -5, 0],
+    "tempo": 0.55
+  },
+  {
+    "id": "bhairav",
+    "name": "Bhairav",
+    "prahar": "Dawn — first prahar of the day",
+    "mood": "Devotional, awakening, serious",
+    "phases": ["morning"],
+    "file": "/assets/audio/morning-raga.mp3",
+    "tonicHz": 138.59,
+    "aroha": [0, 1, 4, 5, 7, 8, 11, 12],
+    "avaroha": [12, 11, 8, 7, 5, 4, 1, 0],
+    "pakad": [4, 5, 8, 8, 7, 4, 5, 1, 1, 0],
+    "tempo": 0.7
+  },
+  {
+    "id": "brindavani-sarang",
+    "name": "Brindavani Sarang",
+    "prahar": "Midday — the heat of the noon sun",
+    "mood": "Bright, open, lilting",
+    "phases": ["midday"],
+    "file": "/assets/audio/midday-raga.mp3",
+    "tonicHz": 138.59,
+    "aroha": [0, 2, 5, 7, 11, 12],
+    "avaroha": [12, 10, 7, 5, 2, 0],
+    "pakad": [-1, 0, 2, 5, 2, 7, 5, 2, 0],
+    "tempo": 1
+  },
+  {
+    "id": "multani",
+    "name": "Multani",
+    "prahar": "Late afternoon — the fourth prahar",
+    "mood": "Intense, yearning, restless",
+    "phases": ["afternoon"],
+    "file": "/assets/audio/afternoon-raga.mp3",
+    "tonicHz": 138.59,
+    "aroha": [-1, 0, 3, 6, 7, 11, 12],
+    "avaroha": [12, 11, 8, 7, 6, 3, 1, 0],
+    "pakad": [-1, 0, 6, 3, 6, 7, 3, 6, 3, 1, 0],
+    "tempo": 0.9
+  },
+  {
+    "id": "yaman",
+    "name": "Yaman",
+    "prahar": "Sunset — first prahar of the night",
+    "mood": "Serene, luminous, contemplative",
+    "phases": ["sunset"],
+    "file": "/assets/audio/evening-raga.mp3",
+    "tonicHz": 138.59,
+    "aroha": [-1, 2, 4, 6, 9, 11, 12],
+    "avaroha": [12, 11, 9, 7, 6, 4, 2, 0],
+    "pakad": [-1, 2, 4, 2, 0, 7, 6, 4, 2, 0],
+    "tempo": 0.65
+  },
+  {
+    "id": "bhairavi",
+    "name": "Bhairavi",
+    "prahar": "The closing raga — sung to end a gathering",
+    "mood": "Tender, reflective, bittersweet",
+    "phases": ["debrief"],
+    "file": "/assets/audio/closing-raga.mp3",
+    "tonicHz": 138.59,
+    "aroha": [0, 1, 3, 5, 7, 8, 10, 12],
+    "avaroha": [12, 10, 8, 7, 5, 3, 1, 0],
+    "pakad": [5, 3, 1, 3, 5, 3, 1, 0],
+    "tempo": 0.6
+  }
+]

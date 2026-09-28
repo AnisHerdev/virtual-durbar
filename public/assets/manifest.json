@@ -1,0 +1,102 @@
+{
+  "backgrounds": [
+    {
+      "id": "durbar-night",
+      "label": "Court at night",
+      "file": "/assets/backgrounds/durbar-night.svg",
+      "phases": [
+        "lobby"
+      ]
+    },
+    {
+      "id": "durbar-morning",
+      "label": "Court at dawn",
+      "file": "/assets/backgrounds/durbar-morning.svg",
+      "phases": [
+        "morning"
+      ]
+    },
+    {
+      "id": "durbar-midday",
+      "label": "Court at noon",
+      "file": "/assets/backgrounds/durbar-midday.svg",
+      "phases": [
+        "midday"
+      ]
+    },
+    {
+      "id": "durbar-afternoon",
+      "label": "Court in the afternoon",
+      "file": "/assets/backgrounds/durbar-afternoon.svg",
+      "phases": [
+        "afternoon"
+      ]
+    },
+    {
+      "id": "durbar-sunset",
+      "label": "Court at sunset",
+      "file": "/assets/backgrounds/durbar-sunset.svg",
+      "phases": [
+        "sunset",
+        "debrief"
+      ]
+    }
+  ],
+  "props": [
+    {
+      "id": "crown-chola",
+      "label": "Chola kirita mukuta",
+      "file": "/assets/props/crown-chola.svg",
+      "scale": 1.25,
+      "anchorY": 0.1
+    },
+    {
+      "id": "turban-saffron",
+      "label": "Saffron pagdi",
+      "file": "/assets/props/turban-saffron.svg",
+      "scale": 1.55,
+      "anchorY": 0.16
+    },
+    {
+      "id": "turban-green",
+      "label": "Green pagdi",
+      "file": "/assets/props/turban-green.svg",
+      "scale": 1.55,
+      "anchorY": 0.16
+    },
+    {
+      "id": "turban-indigo",
+      "label": "Indigo pagdi",
+      "file": "/assets/props/turban-indigo.svg",
+      "scale": 1.55,
+      "anchorY": 0.16
+    },
+    {
+      "id": "turban-white",
+      "label": "White pagdi",
+      "file": "/assets/props/turban-white.svg",
+      "scale": 1.55,
+      "anchorY": 0.16
+    },
+    {
+      "id": "turban-marigold",
+      "label": "Marigold pagdi",
+      "file": "/assets/props/turban-marigold.svg",
+      "scale": 1.55,
+      "anchorY": 0.16
+    },
+    {
+      "id": "helmet-senapati",
+      "label": "Senapati's helmet",
+      "file": "/assets/props/helmet-senapati.svg",
+      "scale": 1.45,
+      "anchorY": 0.14
+    }
+  ],
+  "borders": [
+    {
+      "id": "border-miniature",
+      "file": "/assets/props/border-miniature.svg"
+    }
+  ]
+}

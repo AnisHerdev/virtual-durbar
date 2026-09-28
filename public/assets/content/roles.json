@@ -1,0 +1,79 @@
+[
+  {
+    "id": "raja",
+    "title": "Raja / Rani",
+    "sanskrit": "राजा",
+    "epithet": "Sovereign of the Realm",
+    "description": "Seated at the head of the court. Assigns petitions, pronounces verdicts, issues the day's edict — and may once test a minister's loyalty.",
+    "naturalFit": ["verdicts", "edicts", "the Loyalty Test"],
+    "headwear": "crown-chola",
+    "color": "#b8860b",
+    "emblem": "☀"
+  },
+  {
+    "id": "mahamantri",
+    "title": "Mahamantri",
+    "sanskrit": "महामन्त्री",
+    "epithet": "Chief Advisor",
+    "description": "The realm's first counsellor. Reads witnesses, untangles disputes, and parleys with enemy envoys to buy time.",
+    "naturalFit": ["diplomacy", "detective work", "parley"],
+    "headwear": "turban-saffron",
+    "color": "#c2410c",
+    "emblem": "✦"
+  },
+  {
+    "id": "treasurer",
+    "title": "Koshadhyaksha",
+    "sanskrit": "कोषाध्यक्ष",
+    "epithet": "Treasurer",
+    "description": "Keeper of the royal treasury and ledgers. Audits accounts, weighs merchants' claims and pays for reinforcements.",
+    "naturalFit": ["revenue", "trade", "resources"],
+    "headwear": "turban-green",
+    "color": "#15803d",
+    "emblem": "◈"
+  },
+  {
+    "id": "senapati",
+    "title": "Senapati",
+    "sanskrit": "सेनापति",
+    "epithet": "Commander of the Army",
+    "description": "Keeps the guard logs and commands the troops — but in battle must move them blind, trusting the Spy Chief's word.",
+    "naturalFit": ["military", "guard duty", "troop orders"],
+    "headwear": "helmet-senapati",
+    "color": "#b91c1c",
+    "emblem": "⚔"
+  },
+  {
+    "id": "spy",
+    "title": "Gudhapurusha Pramukh",
+    "sanskrit": "गूढपुरुष प्रमुख",
+    "epithet": "Spy Chief",
+    "description": "Master of the realm's hidden eyes. Alone sees where the enemy will strike, and chooses what to tell the court.",
+    "naturalFit": ["intelligence", "covert tasks", "scouting"],
+    "headwear": "turban-indigo",
+    "color": "#1e3a8a",
+    "emblem": "◉"
+  },
+  {
+    "id": "nyayadhish",
+    "title": "Nyayadhish",
+    "sanskrit": "न्यायाधीश",
+    "epithet": "Minister of Justice",
+    "description": "Knows the law and the customs of the court. Guides trials and weighs evidence for the Raja.",
+    "naturalFit": ["trials", "law", "oaths"],
+    "headwear": "turban-white",
+    "color": "#6b21a8",
+    "emblem": "⚖"
+  },
+  {
+    "id": "sitadhyaksha",
+    "title": "Sitadhyaksha",
+    "sanskrit": "सीताध्यक्ष",
+    "epithet": "Superintendent of Agriculture",
+    "description": "Oversees the crown's fields, granaries and canals. In famine, knows the true need of the villages.",
+    "naturalFit": ["famine", "harvests", "irrigation"],
+    "headwear": "turban-marigold",
+    "color": "#a16207",
+    "emblem": "❀"
+  }
+]

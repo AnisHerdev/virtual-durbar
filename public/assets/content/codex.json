@@ -1,0 +1,164 @@
+[
+  {
+    "id": "kantakashodhana",
+    "title": "Removing the Thorns",
+    "era": "Mauryan period (c. 4th–3rd century BCE, traditional dating)",
+    "region": "Magadha",
+    "tale": "Book IV of Kautilya's Arthashastra is called Kantakashodhana — 'the removal of thorns'. It covers the policing of fraudulent artisans and merchants, and the detection of crime through spies, circumstantial evidence and careful questioning.",
+    "lesson": "A good judge follows the evidence — the smudge on the lid — not the easiest suspect.",
+    "source": "Kautilya, Arthashastra, Book IV"
+  },
+  {
+    "id": "harappan-weights",
+    "title": "The Weights of Harappa",
+    "era": "Indus Valley Civilisation (c. 2600–1900 BCE)",
+    "region": "Harappa, Mohenjo-daro, Lothal",
+    "tale": "Indus cities used remarkably standardised cubical weights, often cut from chert. The smaller weights double at each step (1, 2, 4, 8, 16, 32, 64…) while larger ones follow a decimal pattern — the same standard across hundreds of kilometres.",
+    "lesson": "Honest trade needs a shared standard that anyone can check.",
+    "source": "Archaeological finds at Harappa, Mohenjo-daro and Lothal"
+  },
+  {
+    "id": "rani-ki-vav",
+    "title": "Rani ki Vav, the Queen's Stepwell",
+    "era": "11th century CE",
+    "region": "Patan, Gujarat",
+    "tale": "This great stepwell descends seven levels into the earth and is lined with hundreds of carved sculptures. It is traditionally credited to Queen Udayamati, in memory of King Bhima I of the Chaulukya dynasty. It is a UNESCO World Heritage Site.",
+    "lesson": "Water shared well becomes a monument; water fought over becomes a feud.",
+    "source": "UNESCO World Heritage listing (2014)"
+  },
+  {
+    "id": "birbal-mango",
+    "title": "Whose Tree?",
+    "era": "Mughal period folk tradition (16th century setting)",
+    "region": "Court of Akbar",
+    "tale": "In a well-loved folk tale, two men claim one mango tree. Birbal has each told at night that thieves are raiding it. The true owner rushes out to protect what he has tended; the pretender does not stir.",
+    "lesson": "Test what people do, not only what they say.",
+    "source": "Akbar–Birbal oral tradition"
+  },
+  {
+    "id": "megasthenes",
+    "title": "The Envoy Megasthenes",
+    "era": "c. 300 BCE",
+    "region": "Pataliputra",
+    "tale": "Megasthenes, envoy of the Seleucid king Seleucus I, lived at the court of Chandragupta Maurya and wrote the Indica. It survives only in quotations by later writers, describing the great wooden walls of Pataliputra and the city's administration.",
+    "lesson": "Foreign visitors bring trade and ideas — and carry away knowledge of your realm.",
+    "source": "Fragments of Megasthenes' Indica, preserved by Strabo, Arrian and others"
+  },
+  {
+    "id": "hastyadhyaksha",
+    "title": "The Superintendent of Elephants",
+    "era": "Mauryan period",
+    "region": "Magadha",
+    "tale": "The Arthashastra names a Superintendent of Elephants and describes protected elephant forests guarded by foresters. Elephants were counted among the greatest assets of an army, able to break gates and scatter formations.",
+    "lesson": "What is precious to the realm should be protected and paid for, not simply seized.",
+    "source": "Kautilya, Arthashastra, Book II"
+  },
+  {
+    "id": "birbal-line",
+    "title": "The Shorter Line",
+    "era": "Mughal period folk tradition",
+    "region": "Court of Akbar",
+    "tale": "Akbar drew a line and asked his courtiers to shorten it without touching it. They were baffled until Birbal drew a longer line beside it.",
+    "lesson": "Sometimes you change a thing by changing what surrounds it.",
+    "source": "Akbar–Birbal oral tradition"
+  },
+  {
+    "id": "birbal-sugar",
+    "title": "Sugar and Sand",
+    "era": "Mughal period folk tradition",
+    "region": "Court of Akbar",
+    "tale": "Challenged to separate sugar from sand, Birbal scattered the mixture beside an anthill. By morning the ants had carried away the sugar and left the sand.",
+    "lesson": "Know who in your realm is best suited to each task.",
+    "source": "Akbar–Birbal oral tradition"
+  },
+  {
+    "id": "birbal-lamp",
+    "title": "The Hall Full of Light",
+    "era": "Mughal period folk tradition",
+    "region": "Court of Akbar",
+    "tale": "Asked to fill a room completely at almost no cost, the wise answer was not straw or sand but a single lamp, whose light reached every corner.",
+    "lesson": "Small, well-chosen measures can reach an entire realm.",
+    "source": "Akbar–Birbal oral tradition"
+  },
+  {
+    "id": "arthashastra-spies",
+    "title": "The Institution of Spies",
+    "era": "Mauryan period",
+    "region": "Magadha",
+    "tale": "The Arthashastra describes spies disguised as students, recluses, householders, merchants and ascetics. It advises that information be believed only when separate sources agree.",
+    "lesson": "Check one report against another before you act on it.",
+    "source": "Kautilya, Arthashastra, Book I, chapters 11–12"
+  },
+  {
+    "id": "harsha-prayag",
+    "title": "Harsha's Assembly at Prayag",
+    "era": "7th century CE",
+    "region": "Prayaga (Prayagraj)",
+    "tale": "The Chinese pilgrim Xuanzang described how King Harshavardhana held a great assembly at Prayaga every five years and gave away the wealth stored in his treasury to monks, Brahmins, the poor and the needy.",
+    "lesson": "A treasury exists to serve the people in their hour of need.",
+    "source": "Xuanzang, Records of the Western Regions"
+  },
+  {
+    "id": "kumbhalgarh",
+    "title": "The Great Wall of Kumbhalgarh",
+    "era": "15th century CE",
+    "region": "Mewar, Rajasthan",
+    "tale": "Built under Rana Kumbha, Kumbhalgarh is ringed by walls said to run for about 36 km over the Aravalli hills. It is one of the Hill Forts of Rajasthan listed by UNESCO, and the traditional birthplace of Maharana Pratap.",
+    "lesson": "Walls hold only when every gate is watched.",
+    "source": "UNESCO World Heritage listing, Hill Forts of Rajasthan (2013)"
+  },
+  {
+    "id": "todar-mal",
+    "title": "Todar Mal's Survey",
+    "era": "16th century CE",
+    "region": "Mughal Empire",
+    "tale": "Raja Todar Mal, Akbar's finance minister, reorganised land revenue from 1580 by measuring fields and setting the tax from the average produce and prices of the previous ten years (the dahsala system).",
+    "lesson": "Fair taxation begins with honest measurement.",
+    "source": "Abu'l-Fazl, Ain-i-Akbari"
+  },
+  {
+    "id": "kallanai",
+    "title": "Kallanai, the Grand Anicut",
+    "era": "c. 2nd century CE (traditional attribution)",
+    "region": "Kaveri river, Tamil Nadu",
+    "tale": "Tradition credits the Chola king Karikala with building the Kallanai, a stone weir across the Kaveri that diverts its waters into the fertile delta. It is still in use today — among the oldest water-regulation works in the world that still function.",
+    "lesson": "A king who tames the river feeds generations yet unborn.",
+    "source": "Tamil Sangam-era tradition; Public Works records of the Kaveri delta"
+  },
+  {
+    "id": "ashoka-edicts",
+    "title": "Ashoka's Roadside Trees",
+    "era": "3rd century BCE",
+    "region": "Mauryan Empire",
+    "tale": "In his Seventh Pillar Edict, the emperor Ashoka records that he had banyan trees planted along the roads for shade, mango groves grown, wells dug and rest-houses built for people and animals.",
+    "lesson": "Care for the traveller is care for the whole realm.",
+    "source": "Ashoka, Pillar Edict VII"
+  },
+  {
+    "id": "sher-shah",
+    "title": "Sher Shah's Road",
+    "era": "1540–1545 CE",
+    "region": "North India",
+    "tale": "In a reign of only five years, Sher Shah Suri rebuilt and extended the great road from Bengal to the north-west, later called the Grand Trunk Road, with sarais at regular intervals and a horse-post for messages. He also issued the silver rupiya.",
+    "lesson": "Roads, rest-houses and reliable coin bind a realm together.",
+    "source": "Abbas Khan Sarwani, Tarikh-i-Sher Shahi"
+  },
+  {
+    "id": "arthashastra-upadha",
+    "title": "Upadha: Testing the Ministers",
+    "era": "Mauryan period",
+    "region": "Magadha",
+    "tale": "The Arthashastra advises the king to test each minister in secret with four kinds of temptation — righteousness (dharma), wealth (artha), desire (kama) and fear (bhaya) — and to give each post only to those who withstand the relevant test.",
+    "lesson": "Trust is earned under temptation, not in comfort.",
+    "source": "Kautilya, Arthashastra, Book I, chapter 10"
+  },
+  {
+    "id": "kautilya",
+    "title": "Kautilya and the Arthashastra",
+    "era": "Traditionally 4th century BCE",
+    "region": "Magadha",
+    "tale": "Tradition identifies Kautilya with Chanakya, the counsellor of Chandragupta Maurya. The Arthashastra, a treatise on statecraft, economics and law, was rediscovered in manuscript by R. Shamasastry in Mysore in 1905 and translated into English in 1915.",
+    "lesson": "Statecraft is the art of seeing clearly — including what others hide.",
+    "source": "R. Shamasastry (trans.), Kautilya's Arthashastra, 1915"
+  }
+]

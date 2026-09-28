@@ -1,0 +1,68 @@
+[
+  {
+    "id": "false-intelligence",
+    "label": "False intelligence",
+    "sanskrit": "मिथ्या वार्ता",
+    "betrayal": true,
+    "explanation": "A forged report or deliberately wrong dispatch, designed to steer the court into a bad decision.",
+    "arthashastra": {
+      "citation": "Arthashastra I.12 (adapted from R. Shamasastry, 1915)",
+      "text": "When the information received from three different sources agrees exactly, it shall be held reliable."
+    }
+  },
+  {
+    "id": "embezzlement",
+    "label": "Embezzlement",
+    "sanskrit": "अपहार",
+    "betrayal": true,
+    "explanation": "Quietly diverting public funds — here, the famine relief — into a private purse while appearing generous.",
+    "arthashastra": {
+      "citation": "Arthashastra II.9 (adapted from R. Shamasastry, 1915)",
+      "text": "Just as it is impossible not to taste the honey or poison at the tip of the tongue, so it is impossible for one who handles the king's revenue not to taste at least a little of it."
+    }
+  },
+  {
+    "id": "bribery",
+    "label": "Taking a bribe",
+    "sanskrit": "उत्कोच",
+    "betrayal": true,
+    "explanation": "Accepting a secret payment to decide a petition in someone's favour, at the realm's cost.",
+    "arthashastra": {
+      "citation": "Arthashastra II.9 (adapted from R. Shamasastry, 1915)",
+      "text": "Just as fish moving under water cannot be found out drinking or not drinking, so officers employed in government work cannot be found out while taking money for themselves."
+    }
+  },
+  {
+    "id": "sabotage",
+    "label": "Treachery within",
+    "sanskrit": "अभ्यन्तर कोप",
+    "betrayal": true,
+    "explanation": "Secretly weakening the realm's own defences — bribing a gatekeeper to thin the guard.",
+    "arthashastra": {
+      "citation": "Arthashastra IX.3 (adapted from R. Shamasastry, 1915)",
+      "text": "Of troubles from within and troubles from without, those from within are the more serious, like the danger of a snake lurking in the house."
+    }
+  },
+  {
+    "id": "susceptible-to-bribe",
+    "label": "Failed the test of wealth",
+    "sanskrit": "अर्थोपधा",
+    "betrayal": true,
+    "explanation": "Accepted the Raja's secret test bribe — the 'test of wealth' (arthopadha) described by Kautilya.",
+    "arthashastra": {
+      "citation": "Arthashastra I.10 (adapted from R. Shamasastry, 1915)",
+      "text": "The king shall ascertain, by the application of secret temptations, the purity or impurity of his ministers."
+    }
+  },
+  {
+    "id": "loyalty-proven",
+    "label": "Withstood temptation",
+    "sanskrit": "शुद्ध",
+    "betrayal": false,
+    "explanation": "Refused the Raja's secret test bribe.",
+    "arthashastra": {
+      "citation": "Arthashastra I.10 (adapted from R. Shamasastry, 1915)",
+      "text": "Those whose purity has been tested under temptations of wealth shall be employed as collectors of revenue and keepers of the treasury."
+    }
+  }
+]

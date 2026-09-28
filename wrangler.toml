@@ -1,0 +1,6 @@
+# Cloudflare Pages project config (used by `wrangler pages dev` / `wrangler pages deploy`).
+# Secrets (LIVEKIT_API_KEY, LIVEKIT_API_SECRET, LIVEKIT_URL) are set in the
+# Pages dashboard or in a local `.dev.vars` file — never here.
+name = "virtual-durbar"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-01"

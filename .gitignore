@@ -1,0 +1,12 @@
+node_modules
+dist
+.wrangler
+*.local
+.env
+.env.*
+!.env.example
+.dev.vars
+# copied from node_modules on install (scripts/copy-mediapipe.mjs)
+public/mediapipe/
+*.tsbuildinfo
+.DS_Store

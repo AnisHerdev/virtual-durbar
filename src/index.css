@@ -1,0 +1,218 @@
+@import 'tailwindcss';
+
+/* Indian miniature palette: flat pigments, gold leaf, parchment and stone. */
+@theme {
+  --color-parchment: #f3e3c3;
+  --color-parchment-deep: #e6cf9f;
+  --color-ink: #2b1a12;
+  --color-ink-soft: #5b4636;
+  --color-sindoor: #b3202a;
+  --color-sindoor-deep: #7e1720;
+  --color-gold: #c9a227;
+  --color-gold-light: #e9c66a;
+  --color-lapis: #1f3a6e;
+  --color-peacock: #1d6b44;
+  --color-marigold: #e8a33d;
+  --color-stone: #3a2a22;
+  --color-stone-deep: #221610;
+
+  --font-display: 'Rozha One', 'Georgia', serif;
+  --font-body: 'Crimson Pro', 'Georgia', serif;
+  --font-deva: 'Tiro Devanagari Sanskrit', serif;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 17px;
+    color: var(--color-parchment);
+    background-color: var(--color-stone-deep);
+    /* Carved stone lattice (jaali), drawn inline so it costs no request. */
+    background-image:
+      radial-gradient(circle at 50% 0%, rgb(158 42 28 / 0.35), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4 L44 24 L24 44 L4 24 Z' fill='none' stroke='%23c9a227' stroke-opacity='0.07' stroke-width='2'/%3E%3Ccircle cx='24' cy='24' r='5' fill='none' stroke='%23c9a227' stroke-opacity='0.08' stroke-width='2'/%3E%3C/svg%3E");
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-light);
+    outline-offset: 2px;
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  /* Parchment folio with a painted miniature border. */
+  .folio {
+    background-color: var(--color-parchment);
+    background-image: radial-gradient(ellipse at center, transparent 55%, rgb(166 124 62 / 0.22));
+    color: var(--color-ink);
+    border: 14px solid transparent;
+    border-image: url('/assets/props/border-miniature.svg') 30 round;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.45);
+  }
+  .folio-plain {
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
+    border: 2px solid var(--color-gold);
+    outline: 1px solid var(--color-sindoor);
+    outline-offset: -6px;
+    box-shadow: 0 6px 18px rgb(0 0 0 / 0.35);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.2;
+    border-radius: 6px;
+    border: 2px solid var(--color-gold);
+    transition:
+      transform 120ms ease,
+      filter 120ms ease,
+      background-color 120ms ease;
+    cursor: pointer;
+  }
+  .btn:hover:not(:disabled) {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-royal {
+    background: var(--color-sindoor);
+    color: var(--color-parchment);
+    box-shadow: inset 0 0 0 2px var(--color-sindoor-deep);
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: inherit;
+    border-color: currentColor;
+  }
+  .btn-choice {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+    background: var(--color-parchment-deep);
+    color: var(--color-ink);
+    border-color: var(--color-ink-soft);
+    font-family: var(--font-body);
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+  .btn-choice[aria-pressed='true'] {
+    background: var(--color-lapis);
+    color: var(--color-parchment);
+    border-color: var(--color-gold);
+  }
+  .field {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: 2px solid var(--color-ink-soft);
+    background: #fbf3e0;
+    color: var(--color-ink);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-sindoor);
+  }
+  .label {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+  /* Mughal arch (mehrab) frame for video seats. */
+  .arch {
+    border-radius: 50% 50% 10px 10px / 22% 22% 10px 10px;
+  }
+  .seat-frame {
+    padding: 5px;
+    background: linear-gradient(var(--color-gold), #8a6a12);
+    box-shadow:
+      0 0 0 2px var(--color-sindoor-deep),
+      0 8px 20px rgb(0 0 0 / 0.5);
+  }
+  .rule-ornament {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-gold);
+  }
+  .rule-ornament::before,
+  .rule-ornament::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+  }
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gold) transparent;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px var(--color-gold-light), 0 0 18px 2px rgb(233 198 106 / 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--color-gold-light), 0 0 6px 0 rgb(233 198 106 / 0.25);
+  }
+}
+.speaking {
+  animation: glow 1.2s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 360ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speaking,
+  .rise {
+    animation: none;
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "startingStats": { "gold": 1000, "grain": 800, "troops": 40, "workers": 120, "morale": 60, "fort": 100 },
+  "startingPurse": { "gold": 100, "grain": 60 },
+  "days": [
+    {
+      "day": 1,
+      "theme": "Day of Justice",
+      "tasks": [
+        { "phase": "morning", "taskId": "stolen-necklace" },
+        { "phase": "morning", "taskId": "cheating-scales" },
+        { "phase": "midday", "taskId": "birbal-line" },
+        { "phase": "afternoon", "taskId": "court-trial" },
+        { "phase": "sunset", "taskId": "sunset-1" }
+      ]
+    },
+    {
+      "day": 2,
+      "theme": "Day of Hunger",
+      "tasks": [
+        { "phase": "morning", "taskId": "dry-well" },
+        { "phase": "morning", "taskId": "mango-tree" },
+        { "phase": "midday", "taskId": "sugar-sand" },
+        { "phase": "afternoon", "taskId": "famine" },
+        { "phase": "sunset", "taskId": "sunset-2" }
+      ]
+    },
+    {
+      "day": 3,
+      "theme": "Day of the Siege",
+      "tasks": [
+        { "phase": "morning", "taskId": "stranger-gate" },
+        { "phase": "morning", "taskId": "elephant-tax" },
+        { "phase": "midday", "taskId": "fill-the-hall" },
+        { "phase": "afternoon", "taskId": "defend-fort" },
+        { "phase": "sunset", "taskId": "sunset-3" }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "stolen-necklace",
+      "kind": "petition",
+      "mode": "puzzle",
+      "title": "The Stolen Necklace",
+      "petitioner": "Kamala, a goldsmith's widow",
+      "summary": "During her daughter's wedding feast, Kamala's pearl necklace vanished from a locked room. She begs the court to name the thief.",
+      "clues": [
+        "The room's only window is barred. The thief came through the door.",
+        "There is one key. Kamala wears it on her waist-cord — except while she bathed, when it hung on a peg by the courtyard well.",
+        "Raghu the servant boy drew water at that well all evening. He swears he never left it.",
+        "Cousin Madhav arrived late with fresh henna on his palms. The lid of the jewel box bears an orange smudge.",
+        "Sundari, the neighbour's daughter, sang with the women through the whole feast; twenty guests heard her."
+      ],
+      "suggestedRole": "mahamantri",
+      "seconds": 75,
+      "options": [
+        { "id": "raghu", "label": "Raghu, the servant boy", "effects": { "morale": -5 }, "outcome": "The boy is flogged, the necklace never found. Weeks later Madhav is seen selling pearls in the next town." },
+        { "id": "madhav", "label": "Madhav, the late-arriving cousin", "correct": true, "effects": { "morale": 5, "gold": 20 }, "outcome": "Confronted with the henna-stained lid, Madhav breaks down; the pearls are found sewn into his sash. He pays a fine to the crown." },
+        { "id": "sundari", "label": "Sundari, the neighbour's daughter", "effects": { "morale": -6 }, "outcome": "Twenty wedding guests protest her innocence. The court's judgement becomes a bazaar joke." },
+        { "id": "household", "label": "Fine the whole household", "effects": { "gold": 30, "morale": -8 }, "outcome": "The crown's coffers gain a little, but the widow is shamed and the thief walks free." }
+      ],
+      "timeoutEffects": { "morale": -4 },
+      "codexId": "kantakashodhana"
+    },
+    {
+      "id": "cheating-scales",
+      "kind": "petition",
+      "mode": "puzzle",
+      "title": "The Cheating Scales",
+      "petitioner": "The market inspector of the grain bazaar",
+      "summary": "A grain merchant is accused of cheating with a false weight. Exactly one of his four weights — marked 1, 2, 3 and 5 seers — is false. The inspector tested them on the royal balance.",
+      "clues": [
+        "The 1-seer weight balanced the crown's own 1-seer standard.",
+        "The 1-seer and 2-seer together balanced the 3-seer.",
+        "The 3-seer and 2-seer together were set against the 5-seer: the 5-seer's pan rose.",
+        "Only one weight is false."
+      ],
+      "suggestedRole": "treasurer",
+      "seconds": 60,
+      "options": [
+        { "id": "w1", "label": "The 1-seer weight", "effects": { "morale": -4, "gold": -10 }, "outcome": "The 1-seer matched the crown standard — the court is laughed at, and the crown pays the merchant for his trouble." },
+        { "id": "w2", "label": "The 2-seer weight", "effects": { "morale": -4, "gold": -10 }, "outcome": "If the 2-seer were false, 1 + 2 could not have balanced 3. The merchant is compensated; the real cheat continues." },
+        { "id": "w3", "label": "The 3-seer weight", "effects": { "morale": -4, "gold": -10 }, "outcome": "The 3-seer agreed with 1 + 2. The accusation collapses and the crown pays damages." },
+        { "id": "w5", "label": "The 5-seer weight is light", "correct": true, "effects": { "gold": 40, "morale": 4 }, "outcome": "The 5-seer is shaved underneath. The merchant is fined and every shop in the bazaar rushes to have its weights stamped." }
+      ],
+      "timeoutEffects": { "morale": -3 },
+      "codexId": "harappan-weights"
+    },
+    {
+      "id": "birbal-line",
+      "kind": "riddle",
+      "title": "Birbal's Line",
+      "source": "Akbar–Birbal folk tales",
+      "prompt": "The emperor draws a line on the floor of the court: \"Make this line shorter — but you may not touch, erase or cut it.\" How?",
+      "seconds": 45,
+      "options": [
+        { "id": "a", "label": "Pour sand over half of it" },
+        { "id": "b", "label": "Draw a longer line beside it" },
+        { "id": "c", "label": "Fold the carpet it is drawn on" },
+        { "id": "d", "label": "Proclaim that it is shorter" }
+      ],
+      "answerId": "b",
+      "explanation": "Birbal drew a longer line beside the emperor's. Without being touched, the first line had become the shorter one.",
+      "goldBonus": 50,
+      "codexId": "birbal-line"
+    },
+    {
+      "id": "court-trial",
+      "kind": "trial",
+      "title": "The Court Trial: The Missing Tribute",
+      "summary": "Five hundred gold coins of tribute vanished from the sealed treasury vault during the night. Each of you holds a different record. Share what you know, weigh it, and let the Raja pronounce the verdict before the lamps burn out.",
+      "seconds": 240,
+      "suspects": [
+        { "id": "bhima", "name": "Bhima, the vault guard", "description": "On duty all night at the vault door." },
+        { "id": "vishnudatta", "name": "Vishnudatta, the royal scribe", "description": "Keeps the tribute ledger and carries the vault seal." },
+        { "id": "dhanpal", "name": "Dhanpal, the merchant", "description": "Delivered the tribute chests yesterday; known gambler." },
+        { "id": "lalita", "name": "Lalita, the palace cook", "description": "Brings the night guard his meal at the third watch." }
+      ],
+      "culpritId": "vishnudatta",
+      "explanation": "The vault was opened with a true impression of the scribe's seal — and the seal never leaves him. He rewrote the ledger in fresh ink, and paid off his debts and bought a horse with new gold the very next morning. Dhanpal was at the dice house; Bhima logged the opening honestly.",
+      "clues": [
+        { "id": "guard-log", "role": "senapati", "source": "Guard log (Senapati)", "text": "Third watch: vault opened with the scribe's seal, then resealed. Guard on duty: Bhima. No forced entry." },
+        { "id": "accounts", "role": "treasurer", "source": "Treasury accounts (Treasurer)", "text": "The tribute page was rewritten — the ink is still fresh. The hand is the scribe's, or a very good copy of it." },
+        { "id": "spy-report", "role": "spy", "source": "Spy report (Spy Chief)", "text": "Merchant Dhanpal spent the night at the dice house; a dozen gamblers saw him lose. At dawn the scribe bought a horse, paying in new gold coins." },
+        { "id": "witness", "role": "mahamantri", "source": "Witness statement (Mahamantri)", "text": "The cook Lalita says Bhima was awake when she brought his meal, grumbling that the scribe 'never lets that seal out of his sight'." },
+        { "id": "law", "role": "nyayadhish", "source": "Court custom (Nyayadhish)", "text": "By custom the vault seal never leaves the scribe's person. A copied seal leaves a crooked edge — last night's wax shows a clean, true impression." },
+        { "id": "debts", "role": "sitadhyaksha", "source": "Village reports (Sitadhyaksha)", "text": "The scribe's family lands failed two harvests running. Moneylenders in his village say he owed them heavily — until yesterday." },
+        { "id": "raja-memory", "role": "raja", "source": "Your own memory (Raja)", "text": "You recall signing no order to open the vault last night." }
+      ],
+      "success": { "effects": { "gold": 400, "morale": 8 }, "outcome": "The scribe's saddlebags hold the missing gold. The court has seen that the powerful are not above the law." },
+      "failure": { "effects": { "morale": -10 }, "outcome": "An innocent is punished while the true thief rides away with the tribute. Whispers of injustice fill the bazaar." },
+      "codexId": "arthashastra-spies"
+    },
+    {
+      "id": "sunset-1",
+      "kind": "sunset",
+      "title": "Sunset Edict — Day of Justice",
+      "summary": "The lamps are lit. The Raja must issue one edict before the court rises.",
+      "edicts": [
+        { "id": "festival", "label": "Proclaim a festival of lamps", "description": "Spend from the treasury to lift the people's spirits.", "effects": { "gold": -80, "morale": 8 } },
+        { "id": "salt-tax", "label": "Raise the salt tax", "description": "Fill the treasury at the cost of goodwill.", "effects": { "gold": 120, "morale": -6 } },
+        { "id": "survey", "label": "Survey and measure the fields", "description": "Assess the land fairly so revenue follows the true harvest.", "effects": { "workers": -10, "grain": 60, "morale": 2 }, "codexId": "todar-mal" }
+      ]
+    },
+    {
+      "id": "dry-well",
+      "kind": "petition",
+      "mode": "policy",
+      "title": "The Dry Well Dispute",
+      "petitioner": "Headmen of Palashpur and Kanakgram",
+      "summary": "In the drought, only one stepwell still holds water. Palashpur's ancestors dug it; Kanakgram's fields lie closer. Both villages have come armed with sticks.",
+      "clues": [
+        "Palashpur has a second, shallower well that is nearly dry.",
+        "Kanakgram grows the grain that feeds the capital's market.",
+        "The crown's masons are idle until the rains."
+      ],
+      "suggestedRole": "sitadhyaksha",
+      "seconds": 60,
+      "options": [
+        { "id": "palashpur", "label": "Award the well to Palashpur, who dug it", "wisdom": 1, "effects": { "morale": -4, "grain": -40 }, "outcome": "Custom is honoured, but Kanakgram's fields wither and grain prices climb in the capital." },
+        { "id": "turns", "label": "Share it by turns, with a crown officer keeping the rota", "wisdom": 3, "effects": { "morale": 6, "workers": -5 }, "outcome": "Water flows to both villages on alternate days. The sticks are put away." },
+        { "id": "new-well", "label": "Build Kanakgram a new stepwell at crown expense", "wisdom": 2, "effects": { "gold": -120, "workers": -15, "morale": 8, "grain": 40 }, "outcome": "Costly — but the idle masons cut a fine stepwell that will outlast everyone in this court." }
+      ],
+      "timeoutEffects": { "morale": -6 },
+      "codexId": "rani-ki-vav"
+    },
+    {
+      "id": "mango-tree",
+      "kind": "petition",
+      "mode": "puzzle",
+      "title": "Whose Mango Tree?",
+      "petitioner": "Ramu and Shamu, neighbours",
+      "summary": "Two neighbours each claim the mango tree in the lane between their houses. Neither has a deed; each brings a witness. How does the court find the true owner?",
+      "clues": [
+        "Each man's witness turns out to be his own cousin.",
+        "The owner has watered and guarded the tree for twelve years.",
+        "The other man only wants the fruit."
+      ],
+      "suggestedRole": "nyayadhish",
+      "seconds": 75,
+      "options": [
+        { "id": "split", "label": "Split the fruit equally each season", "effects": { "morale": -2 }, "outcome": "Peace for a season — but the man who tended the tree for twelve years feels robbed." },
+        { "id": "thieves", "label": "Send word at night that thieves are stripping the tree, and watch who runs to guard it", "correct": true, "effects": { "morale": 6 }, "outcome": "Ramu sprints out with a lamp and a stick; Shamu rolls over and sleeps. The tree is Ramu's — and the lane laughs at Shamu for a month." },
+        { "id": "cut", "label": "Cut the tree down and divide the wood", "effects": { "morale": -6, "workers": -2 }, "outcome": "A twelve-year tree is lost to settle a quarrel. The court is called foolish." },
+        { "id": "elder", "label": "Award it to the elder of the two", "effects": { "morale": -3 }, "outcome": "Age is not ownership. The real owner appeals, and the dispute drags on." }
+      ],
+      "timeoutEffects": { "morale": -3 },
+      "codexId": "birbal-mango"
+    },
+    {
+      "id": "sugar-sand",
+      "kind": "riddle",
+      "title": "Sugar from Sand",
+      "source": "Akbar–Birbal folk tales",
+      "prompt": "A jar of sugar has been mixed with sand. Separate them — without water, fire or any tool, and without lifting a finger yourself.",
+      "seconds": 45,
+      "options": [
+        { "id": "a", "label": "Winnow it in the wind" },
+        { "id": "b", "label": "Wait for the rains to wash it" },
+        { "id": "c", "label": "Scatter it beside an anthill" },
+        { "id": "d", "label": "Let the camels graze on it" }
+      ],
+      "answerId": "c",
+      "explanation": "Birbal scattered the mixture near an anthill. By morning, the ants had carried off every grain of sugar and left the sand behind.",
+      "goldBonus": 50,
+      "codexId": "birbal-sugar"
+    },
+    {
+      "id": "famine",
+      "kind": "famine",
+      "title": "The Famine",
+      "summary": "The monsoon failed in the eastern villages. Relief carts leave at dusk. Pledge grain and gold from your own purse — in secret. The Treasurer may also open the royal granary. Only the Sitadhyaksha knows how much the villages truly need.",
+      "seconds": 210,
+      "need": { "gold": 50, "grain": 100 },
+      "needPerPlayer": { "gold": 30, "grain": 40 },
+      "rumouredNeed": "Reports differ wildly — ask the Sitadhyaksha.",
+      "maxGranaryRelease": 200,
+      "maxDivert": 80,
+      "success": { "effects": { "morale": 12, "workers": 10 }, "outcome": "The carts reach every village. Not one child starves, and the eastern farmers will remember this court." },
+      "failure": { "effects": { "morale": -12, "workers": -20 }, "outcome": "The carts arrive half-empty. Families flee west, and the fields go unsown next season." },
+      "codexId": "harsha-prayag"
+    },
+    {
+      "id": "sunset-2",
+      "kind": "sunset",
+      "title": "Sunset Edict — Day of Hunger",
+      "summary": "The relief carts are gone. What will the Raja decree so this never happens again?",
+      "edicts": [
+        { "id": "open-granaries", "label": "Open the royal granaries to the poor", "description": "Immediate relief from the crown's stores.", "effects": { "grain": -100, "morale": 10 } },
+        { "id": "canal", "label": "Build a stone weir to feed a canal", "description": "A great work of masonry to tame the river, as the Cholas did.", "effects": { "gold": -150, "workers": -20, "grain": 120, "morale": 3 }, "codexId": "kallanai" },
+        { "id": "market-guards", "label": "Post guards against grain hoarders", "description": "Punish those who profit from hunger.", "effects": { "troops": -4, "gold": 40, "morale": 3 } }
+      ]
+    },
+    {
+      "id": "stranger-gate",
+      "kind": "petition",
+      "mode": "policy",
+      "title": "The Stranger at the Gate",
+      "petitioner": "The captain of the western gate",
+      "summary": "A horse trader from beyond the western passes asks to enter the city. His saddlebags hold fine horses' papers — and hand-drawn maps of our roads.",
+      "clues": [
+        "Scouts report dust clouds beyond the western hills.",
+        "Foreign traders have enriched the city for generations.",
+        "The maps mark every well on the road to our walls."
+      ],
+      "suggestedRole": "spy",
+      "seconds": 60,
+      "options": [
+        { "id": "arrest", "label": "Arrest him and seize the maps", "wisdom": 1, "effects": { "fort": 5, "morale": -2, "gold": -10 }, "outcome": "The maps are burned, but whoever sent him simply sends another — and now knows we are watching." },
+        { "id": "shadow", "label": "Welcome him — and have him shadowed by a spy disguised as a wandering ascetic", "wisdom": 3, "effects": { "gold": -20, "fort": 12 }, "outcome": "He leads our 'ascetic' straight to an enemy camp. We learn their numbers and approach." },
+        { "id": "buy", "label": "Welcome him openly and buy his horses", "wisdom": 1, "effects": { "gold": -80, "troops": 6 }, "outcome": "Good horses — but the 'trader' slips away at night with our road maps complete." }
+      ],
+      "timeoutEffects": { "fort": -5 },
+      "codexId": "megasthenes"
+    },
+    {
+      "id": "elephant-tax",
+      "kind": "petition",
+      "mode": "policy",
+      "title": "The Temple Elephants",
+      "petitioner": "The Senapati's quartermaster",
+      "summary": "An enemy army approaches and the fort needs war elephants. The town temple keeps twelve for its festivals.",
+      "clues": [
+        "The temple festival falls next month.",
+        "Elephants can batter down a gate — or break one.",
+        "The treasury is watched closely by the people."
+      ],
+      "suggestedRole": "senapati",
+      "seconds": 60,
+      "options": [
+        { "id": "seize", "label": "Requisition the temple elephants", "wisdom": 0, "effects": { "troops": 8, "morale": -10 }, "outcome": "The army gains its elephants; the priests curse the court from the temple steps." },
+        { "id": "rent", "label": "Rent them at a fair price for the season", "wisdom": 3, "effects": { "gold": -150, "troops": 8, "morale": 2 }, "outcome": "The temple is paid and honoured; the elephants march with garlands on their tusks." },
+        { "id": "infantry", "label": "Leave the elephants; train workers as foot soldiers", "wisdom": 2, "effects": { "workers": -20, "troops": 5, "grain": -40 }, "outcome": "Farmers become soldiers. The fields feel their absence, but the temple is untouched." }
+      ],
+      "timeoutEffects": { "troops": -2 },
+      "codexId": "hastyadhyaksha"
+    },
+    {
+      "id": "fill-the-hall",
+      "kind": "riddle",
+      "title": "Fill the Hall",
+      "source": "Akbar–Birbal folk tales",
+      "prompt": "\"Fill this great hall from floor to ceiling, every corner of it — and spend no more than a single copper coin.\" What do you buy?",
+      "seconds": 45,
+      "options": [
+        { "id": "a", "label": "A cartload of straw" },
+        { "id": "b", "label": "One oil lamp" },
+        { "id": "c", "label": "A sack of sand" },
+        { "id": "d", "label": "A crow, to fill it with noise" }
+      ],
+      "answerId": "b",
+      "explanation": "One small lamp, lit at dusk, filled the whole hall with light — every corner, for a single copper coin.",
+      "goldBonus": 50,
+      "codexId": "birbal-lamp"
+    },
+    {
+      "id": "defend-fort",
+      "kind": "fort",
+      "title": "Defend the Fort",
+      "summary": "Three waves will strike the four gates. Only the Spy Chief sees where the enemy masses. Only the Senapati can move troops — and cannot see the enemy. The Mahamantri may parley once per wave to weaken the largest force, and the Treasurer may buy reinforcements.",
+      "secondsPerWave": 60,
+      "gates": ["North", "East", "South", "West"],
+      "troopsPerWave": 12,
+      "reinforcementCost": 30,
+      "maxReinforcements": 4,
+      "damagePerBreach": 8,
+      "waves": [
+        [2, 6, 1, 3],
+        [5, 1, 4, 2],
+        [3, 2, 8, 1]
+      ],
+      "success": { "effects": { "morale": 12, "troops": 4 }, "outcome": "The enemy breaks against the walls and retreats. Bards will sing of this siege." },
+      "failure": { "effects": { "morale": -15, "gold": -200, "troops": -10 }, "outcome": "The gates are breached and the lower town is sacked before the enemy is driven back." },
+      "codexId": "kumbhalgarh"
+    },
+    {
+      "id": "sunset-3",
+      "kind": "sunset",
+      "title": "Sunset Edict — Day of the Siege",
+      "summary": "The last lamps of the cycle. Issue your final edict — and, if you dare, name the traitor in your court.",
+      "edicts": [
+        { "id": "trees-wells", "label": "Plant shade trees and dig wells along the roads", "description": "Comfort for every traveller, man and beast.", "effects": { "gold": -100, "workers": -10, "morale": 8 }, "codexId": "ashoka-edicts" },
+        { "id": "sarais", "label": "Build sarais and a horse-post along the trunk road", "description": "Rest-houses and swift messengers bind the realm together.", "effects": { "gold": -140, "morale": 5, "fort": 5, "workers": -10 }, "codexId": "sher-shah" },
+        { "id": "walls", "label": "Rebuild and strengthen the walls", "description": "Never again shall the gates tremble.", "effects": { "gold": -120, "fort": 20 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "virtual-durbar",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A browser-based royal court video game: govern a realm through a 3-day cycle with on-device AR attire and a live Raga soundtrack.",
+  "scripts": {
+    "postinstall": "node scripts/copy-mediapipe.mjs",
+    "dev": "vite",
+    "dev:https": "vite --mode https",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@livekit/components-react": "^2.9.24",
+    "@mediapipe/tasks-vision": "^1.0.1",
+    "livekit-client": "^2.22.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  }
+}

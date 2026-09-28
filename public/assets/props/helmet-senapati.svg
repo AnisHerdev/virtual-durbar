@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Senapati's domed steel helmet (top) with plume -->
+  <path d="M70,262 Q70,110 200,90 Q330,110 330,262 Z" fill="#8e98a6" stroke="#2a2f38" stroke-width="5"/>
+  <path d="M100,250 Q110,140 200,118" fill="none" stroke="#cdd4dd" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+  <path d="M90,262 Q200,120 200,92" fill="none" stroke="#5c6572" stroke-width="3"/><path d="M134,262 Q200,120 200,92" fill="none" stroke="#5c6572" stroke-width="3"/><path d="M178,262 Q200,120 200,92" fill="none" stroke="#5c6572" stroke-width="3"/><path d="M222,262 Q200,120 200,92" fill="none" stroke="#5c6572" stroke-width="3"/><path d="M266,262 Q200,120 200,92" fill="none" stroke="#5c6572" stroke-width="3"/><path d="M310,262 Q200,120 200,92" fill="none" stroke="#5c6572" stroke-width="3"/>
+  <rect x="62" y="248" width="276" height="30" rx="8" fill="#c9a227" stroke="#2a2f38" stroke-width="5"/>
+  <circle cx="84" cy="263" r="5" fill="#b3202a"/><circle cx="117" cy="263" r="5" fill="#b3202a"/><circle cx="150" cy="263" r="5" fill="#b3202a"/><circle cx="183" cy="263" r="5" fill="#b3202a"/><circle cx="216" cy="263" r="5" fill="#b3202a"/><circle cx="249" cy="263" r="5" fill="#b3202a"/><circle cx="282" cy="263" r="5" fill="#b3202a"/><circle cx="315" cy="263" r="5" fill="#b3202a"/>
+  <path d="M200,92 L200,50" stroke="#2a2f38" stroke-width="8"/>
+  <circle cx="200" cy="48" r="10" fill="#c9a227" stroke="#2a2f38" stroke-width="4"/>
+  <path d="M204,46 C240,20 290,26 310,56 C276,44 240,46 206,58 Z" fill="#b3202a" stroke="#2a2f38" stroke-width="3"/>
+</svg>
