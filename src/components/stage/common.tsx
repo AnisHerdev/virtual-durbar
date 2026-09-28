@@ -44,17 +44,25 @@ export function useDeadlineTotal(court: Court, deadline?: number): number | unde
   return state.total;
 }
 
+/** What this player should do right now: act, or wait on someone else. */
+export interface Move {
+  act: boolean;
+  text: ReactNode;
+}
+
 export function StageFrame({
   kicker,
   title,
   court,
   deadline,
+  move,
   children,
 }: {
   kicker: string;
   title: string;
   court: Court;
   deadline?: number;
+  move?: Move;
   children: ReactNode;
 }) {
   const total = useDeadlineTotal(court, deadline);
@@ -67,9 +75,39 @@ export function StageFrame({
         </div>
         <Countdown court={court} deadline={deadline} total={total} />
       </header>
+      {move && <YourMove move={move} />}
       <div className="scroll-thin flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-4">{children}</div>
     </section>
   );
+}
+
+/** Pinned under the stage header so the next step is never scrolled away. */
+function YourMove({ move }: { move: Move }) {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className={`flex items-start gap-3 px-4 py-2.5 leading-snug ${
+        move.act ? 'bg-sindoor text-parchment' : 'border-b border-gold/40 bg-parchment-deep text-ink-soft'
+      }`}
+    >
+      <span
+        className={`mt-0.5 shrink-0 rounded-sm px-1.5 py-0.5 font-display text-[0.7rem] uppercase tracking-[0.12em] ${
+          move.act ? 'move-pulse bg-gold-light text-ink' : 'bg-ink/10 text-ink-soft'
+        }`}
+      >
+        {move.act ? 'Your move' : 'Waiting'}
+      </span>
+      <p className={move.act ? 'font-semibold' : 'italic'}>{move.text}</p>
+    </div>
+  );
+}
+
+/** The move once a matter is settled: only the Raja calls the next one. */
+export function proceedMove(court: Court): Move {
+  return court.myRole === 'raja'
+    ? { act: true, text: 'Read the outcome, then call the next matter.' }
+    : { act: false, text: 'The Raja will call the next matter shortly.' };
 }
 
 export function Effects({ effects }: { effects?: StatDelta }) {
@@ -101,7 +139,7 @@ export function Verdict({ success, children }: { success?: boolean; children: Re
 }
 
 export function ProceedBar({ court }: { court: Court }) {
-  if (court.myRole !== 'raja') return <p className="text-sm italic text-ink-soft">The Raja will call the next matter shortly.</p>;
+  if (court.myRole !== 'raja') return null;
   return (
     <button className="btn btn-royal self-start" onClick={() => court.act({ type: 'advance' })}>
       Call the next matter →
